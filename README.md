@@ -19,6 +19,7 @@ The master acceptance IDs and their status are owned by integration-evals. A mer
 - [Acceptance and evidence rules](standards/acceptance-evidence.md), [evidence record](templates/evidence-record.md), and [backlog audit](templates/backlog-audit.md)
 - [Architecture source-of-truth and cross-repository links](standards/architecture-linking.md)
 - [Release and version guidance](standards/releases-versioning.md) and [release record](templates/release-record.md)
+- [Dated partial governance release assessment](adoption/governance-release-record.md) — 2026-10-11 snapshot; GH-11 remains open.
 - [Label planning](standards/labels-planning.md)
 - [Security and secret handling](standards/security-secret-handling.md) and the pending [security policy draft](community/SECURITY.pending.md)
 - [Reusable workflow design](automation-design/reusable-workflows.md) and the [workflow starter](workflow-templates/docs-check.yml)
