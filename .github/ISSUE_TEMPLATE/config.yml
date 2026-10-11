@@ -1,9 +1,7 @@
 # Issue chooser configuration (GH-03-I).
+# No security contact link is listed until a private destination and owner are confirmed.
 blank_issues_enabled: true
 contact_links:
-- name: Security vulnerability (do not file publicly)
-  url: https://github.com/Jevelopers-neatHack-2026/.github/issues/11
-  about: Private reporting route is not yet confirmed (GH-07). Do not post vulnerability details in any issue; contact a known maintainer privately.
 - name: Contribution guidance
   url: https://github.com/Jevelopers-neatHack-2026/.github/blob/main/CONTRIBUTING.md
   about: How to scope issues, link dependencies and attach evidence.

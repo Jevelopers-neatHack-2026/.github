@@ -1,5 +1,5 @@
 # Program issue form (GH-03-I). Source: Jevelopers-neatHack-2026/.github
-name: Bug
+name: Bug report
 description: A defect with a sanitized reproduction.
 title: '[<PREFIX>-NN][P#] Fix <symptom>'
 labels:

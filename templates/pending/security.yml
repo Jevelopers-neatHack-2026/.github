@@ -1,6 +1,7 @@
-# Program issue form (GH-03-I). Source: Jevelopers-neatHack-2026/.github
-name: Security (non-sensitive coordination only)
-description: Track a security task WITHOUT sensitive details. Report vulnerabilities privately.
+# DRAFT ONLY: keep under pending/ until maintainers confirm a private reporting route and owner.
+# Program issue form draft (GH-03-I). Source: Jevelopers-neatHack-2026/.github
+name: Draft security form (route pending; do not activate)
+description: Draft only. The private reporting destination and owner are not confirmed.
 title: '[<PREFIX>-NN][P#] Security: <non-sensitive summary>'
 labels:
 - type:bug
@@ -87,20 +88,17 @@ body:
     required: true
 - type: markdown
   attributes:
-    value: '### Stop: do not report a vulnerability here
+    value: '### Draft only — do not use to report a vulnerability
 
-      This form is public. Use it only for non-sensitive coordination (e.g. "rotate key for service X" without the key). Do **not** include credentials, customer data, exploit steps, proof-of-concept code, logs or secret-bearing attachments.
-
-
-      The private reporting route is **not yet confirmed** (tracked in [GH-07](https://github.com/Jevelopers-neatHack-2026/.github/issues/11)). Until it is, send sensitive details only to a repository maintainer you already know through a private channel, and write `reported privately` below.'
+      The private reporting destination and responsible owner are not confirmed. Do not enter vulnerability details, credentials, customer data, exploit steps, proof-of-concept code, logs or secret-bearing attachments in a GitHub issue. Do not activate this draft until maintainers confirm the destination, access expectations and owner, and complete a safe route walkthrough. This draft collects non-sensitive coordination only.'
 - type: dropdown
   id: private_report
   attributes:
     label: Sensitive details
-    description: Where the sensitive details are.
+    description: This draft is inactive; no confirmed private destination is available.
     options:
-    - none - this is non-sensitive coordination
-    - reported privately to a maintainer
+    - none - non-sensitive coordination only
+    - N/A - no confirmed destination; do not submit
   validations:
     required: true
 - type: checkboxes
