@@ -12,6 +12,7 @@ Documentation baseline only. Implementation and acceptance verification remain p
 
 - [Repository responsibilities and interfaces](docs/architecture/OWNERSHIP.md)
 - [Relevant acceptance criteria](docs/architecture/ACCEPTANCE.md)
+- [Governance inventory and adoption gaps](adoption/governance-inventory.md)
 - [Architecture and diagrams](https://github.com/Jevelopers-neatHack-2026/getticketstub.com/blob/main/docs/architecture-kit/v1.0/README.md)
 - [Central implementation plan](https://github.com/Jevelopers-neatHack-2026/getticketstub.com/blob/main/docs/planning/implementation-plan.md)
 - [Contributor templates (pull request template and adoption)](templates/README.md)
