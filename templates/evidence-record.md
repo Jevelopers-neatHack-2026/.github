@@ -10,7 +10,8 @@ Copy this template for an actual scoped check. Replace every bracketed field wit
 - Owning repository:
 - Issue URL:
 - Owner role:
-- Reviewer role and review date:
+- Execution date/time and timezone (record separately from review date):
+- Reviewer role and review date/time and timezone:
 - Tested full commit SHA, or assembled-manifest revision and digest:
 - Runtime and configuration:
 - Environment:
