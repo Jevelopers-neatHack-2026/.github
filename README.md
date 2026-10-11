@@ -6,7 +6,7 @@ This repository publishes shared contribution standards, governance records, con
 
 At inspected public default-branch revision [e73eacf](https://github.com/Jevelopers-neatHack-2026/.github/commit/e73eacf85299d6d524d176b5c663f44cb7147f04), [PR #19](https://github.com/Jevelopers-neatHack-2026/.github/pull/19) merged the pull-request template and its adoption guide. The PR template contract is `GH-PR-TEMPLATE@1.0.0`; that interface version is separate from execution-policy pack 1.1.0, product releases, and destination adoption status. Recheck live repository state before relying on this dated snapshot.
 
-The governance guidance work and six issue-form set remain under review separately. GH-01 still needs its second-maintainer validation. GH-07 remains blocked until a maintainer confirms a private security-reporting destination and responsible role. The issue-form chooser and security-routing checks remain pending that route and their default-branch review. No sensitive details should be sent through an ordinary public issue while the private route is unresolved.
+The governance guidance work and six issue-form set remain under review separately. `GH-01` still needs its second-maintainer validation. `GH-07` remains blocked until a maintainer confirms a private security-reporting destination and responsible role. The issue-form chooser and security-routing checks remain pending that route and their default-branch review. No sensitive details should be sent through an ordinary public issue while the private route is unresolved.
 
 The central workflow documentation and local fixture can be reviewed independently of a GitHub-hosted workflow run. This repository has no root `.github/workflows` installation; downstream workflow execution, private-workflow access, fork isolation, and secret behavior remain unverified unless separately supported by actual destination evidence.
 
@@ -42,7 +42,7 @@ Use the [bootstrap record](templates/adoption-record.md) to capture source revis
 
 ## Open acceptance and adoption questions
 
-- GH-01 remains open until the required second-maintainer review is recorded.
-- GH-07 security reporting remains blocked until a maintainer confirms the private destination and responsible role; no contact or response time is supplied here.
-- GH-03-I chooser rendering, safe-draft validation, and private security routing remain pending final form review and the confirmed route.
+- `GH-01` remains open until the required second-maintainer review is recorded.
+- `GH-07` security reporting remains blocked until a maintainer confirms the private destination and responsible role; no contact or response time is supplied here.
+- `GH-03-I` chooser rendering, safe-draft validation, and private security routing remain pending final form review and the confirmed route.
 - Per-repository settings and adoption, plus any GitHub-hosted workflow execution or secret-isolation evidence, require separate destination-specific observations.
