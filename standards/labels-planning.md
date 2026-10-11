@@ -31,7 +31,7 @@ The captured baseline target set had ten existing labels. Preserve their current
 | question | Discussion/request-for-information label; preserve. |
 | wontfix | Disposition label; preserve. |
 
-Do not create a second label merely to make templates look consistent. The five non-security issue forms in the reviewed candidate use these existing labels:
+Do not create a second label merely to make templates look consistent. The five active non-security issue forms published on main use these existing labels; see the [issue-form source and adoption guidance](../templates/issue-forms.md):
 
 | Form | Configured labels |
 |---|---|
@@ -42,7 +42,7 @@ Do not create a second label merely to make templates look consistent. The five 
 | Backlog audit | `type:chore` |
 | Security draft | `type:bug` (outside the active chooser; private route remains unconfirmed) |
 
-The candidate source was reviewed at commit `6956871b5eebb9a9a4269f68e75c5089747f8189` after its merge of current main `e73eacf85299d6d524d176b5c663f44cb7147f04`; the security form remains a pending draft, not an active route. The live inventory receipt records all eight names present in all fourteen repositories at the timestamp above. This is a point-in-time existence check, not adoption or proof that every destination continues to have the labels. Recheck the destination's labels and permissions before relying on a form. Do not infer a label rollout or add priority, area, dependency-state, or required-for-v1 labels through these forms.
+The current public main source is [commit `4129e71f42a51d42803b1020e146f54108cf2f93`](https://github.com/Jevelopers-neatHack-2026/.github/commit/4129e71f42a51d42803b1020e146f54108cf2f93), which preserves the form labels from candidate `6956871b5eebb9a9a4269f68e75c5089747f8189`. The security form remains a pending draft outside the chooser, not an active route. The live inventory receipt records all eight names present in all fourteen repositories at the timestamp above. This is a point-in-time existence check, not adoption or proof that every destination continues to have the labels. Recheck the destination's labels and permissions before relying on a form. Do not infer a label rollout or add priority, area, dependency-state, or required-for-v1 labels through these forms.
 
 Examples, with names still proposed:
 

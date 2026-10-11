@@ -27,20 +27,31 @@ These commit references identify inspected source revisions, not promises that t
 
 Before marking a dependency ready, record the exact producer and consumer issue URLs, owner roles, expected artifact and version, tested source revision if one exists, unblock condition, current status date, and evidence needed for consumer acknowledgment. If the issue or revision is unknown, write unknown and assign the resolution to an owner role. Do not manufacture an issue number, contract version, commit, or reviewer.
 
-Example source chain: repository ownership → implementation issue → shared-contracts entry/version → master acceptance ID → immutable evidence → local gate → integrated gate. The actual [shared-contracts gate issue #3](https://github.com/Jevelopers-neatHack-2026/shared-contracts/issues/3) and [integration-evals report issue #8](https://github.com/Jevelopers-neatHack-2026/integration-evals/issues/8) are inspected coordination references. Their links alone establish no completion or current status.
+### Click-through walkthrough: GH-09 and the blocked SC-12 handoff
 
-| Handoff field | Example record |
+This navigation example uses real inspected sources and leaves unobserved implementation values unknown. The source links are useful for finding owners and work; their presence is not a test result.
+
+| Step | Follow this link | What it establishes |
+|---|---|---|
+| Local ownership | [This repository's `OWNERSHIP.md`](../docs/architecture/OWNERSHIP.md) and [local `ACCEPTANCE.md`](../docs/architecture/ACCEPTANCE.md) | The first file describes the `.github` responsibility and role owners. The second selects local criteria; it explicitly leaves master status with integration-evals. |
+| Governance work item and plan | [GH-09 issue #6](https://github.com/Jevelopers-neatHack-2026/.github/issues/6) and the [central implementation plan at inspected commit `5a2986454297dd6df97088a8fbde69adc771f7a0`](https://github.com/Jevelopers-neatHack-2026/getticketstub.com/blob/5a2986454297dd6df97088a8fbde69adc771f7a0/docs/planning/implementation-plan.md) | Issue #6 is the actual leaf for this source-linking guidance. The central plan remains the canonical product sequencing map; it is not a tested lockfile and does not turn the governance issue into product implementation evidence. |
+| Catalog and contract gate | The [shared-contracts catalog at inspected commit `c4caaccc2ea63b273eeac17ed89af8ac64f6bbde`](https://github.com/Jevelopers-neatHack-2026/shared-contracts/blob/c4caaccc2ea63b273eeac17ed89af8ac64f6bbde/docs/contract-catalog.md) and actual [SC-12 gate issue #3](https://github.com/Jevelopers-neatHack-2026/shared-contracts/issues/3) | The catalog is the maintained contract source. SC-12 owns release and consumer handoff evidence. At the cited inspection, executable schema, package, fixture, and accepted version evidence were absent; the exact schema and contract version therefore remain **UNKNOWN**. |
+| Acceptance and evidence source | The [integration-evals master checklist at inspected commit `ff1f6d2df816ebbff34742f51be728fcb5c28cb5`](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/ff1f6d2df816ebbff34742f51be728fcb5c28cb5/planning/acceptance-checklist.md), its [JSON tracker](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/ff1f6d2df816ebbff34742f51be728fcb5c28cb5/planning/acceptance-checklist.json), and [evidence index](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/ff1f6d2df816ebbff34742f51be728fcb5c28cb5/evidence/README.md) | These preserve acceptance ownership and show where evidence belongs. The inspected tracker has no tested revision or evidence record for this handoff. The evidence index is an index, **not runtime proof**. |
+| Local governance gate | This repository's [GH-11 issue #16](https://github.com/Jevelopers-neatHack-2026/.github/issues/16) and [local acceptance view](../docs/architecture/ACCEPTANCE.md) | GH-11 is the local governance release gate. Its gate keys are local checklist identifiers, not global master IDs; this walkthrough does not mark it passed. |
+| Integrated project gate | The actual [integration-evals WP09 / IE-EPIC issue #1](https://github.com/Jevelopers-neatHack-2026/integration-evals/issues/1) and [IE-09A report issue #8](https://github.com/Jevelopers-neatHack-2026/integration-evals/issues/8) | Issue #1 is the integrated verification epic; issue #8 covers machine-readable reporting. They remain separately owned from this local guidance and do not inherit a pass from the links above. |
+
+The handoff represented by this path is **BLOCKED**, recorded 2026-10-11 02:51 UTC from the cited immutable inspections (source status must be rechecked before a later decision):
+
+| Handoff field | Current record |
 |---|---|
-| Producer issue | Actual source link: shared-contracts issue #3 |
-| Consumer/report issue | Actual source link: integration-evals issue #8 |
-| Producer role / consumer role | Agent and research / Finance and reliability; confirm current assignments |
-| Expected artifact/version | Catalog entry and explicit contract version; exact version remains to be confirmed by the owners |
-| Producer revision and executed checks | Unknown until recorded against the producer's immutable revision |
-| Consumer fixture and acknowledgment | Unknown until the consumer runs and reviews it |
-| Unblock condition and date | Both owner roles record the accepted condition and date |
-| Acceptance status | Remains with integration-evals; no status follows from this sample |
+| Producer and issue | shared-contracts maintainer role, Agent and research; [SC-12 issue #3](https://github.com/Jevelopers-neatHack-2026/shared-contracts/issues/3). Named assignee is unassigned in the inspected issue. |
+| Consumer/release reviewer and issue | integration-evals owner role, Finance and reliability; [WP09 / IE-EPIC issue #1](https://github.com/Jevelopers-neatHack-2026/integration-evals/issues/1). Named reviewer is unassigned in the inspected issue. |
+| Expected artifact and version | Canonical contract artifact, explicit schema/contract version, compatible producer and consumer pins, and fixtures/evidence required by SC-12. Exact artifact schema and version: **UNKNOWN** pending the catalog and contract owners. |
+| Inspected source revisions | The linked `c4caaccc…` catalog and `ff1f6d2…` tracker are immutable documentation snapshots only. Runtime-tested producer/consumer revisions, fixture digest, command, and result: **UNKNOWN / NOT RUN**. |
+| Unblock condition | Owners publish the versioned artifact and record exact producer/consumer SHAs, fixture identity/digest, command and result, limitations, and reviewer acknowledgment in the authoritative acceptance/evidence source; see [SC-12's acceptance and closure requirements](https://github.com/Jevelopers-neatHack-2026/shared-contracts/issues/3). |
+| Status date and owner | **BLOCKED as of 2026-10-11 02:51 UTC.** Unblock roles are identified above; named owner/reviewer assignments remain **UNKNOWN** and must be set by those repositories' maintainers. |
 
-This example uses real inspected issue links and deliberately leaves unobserved values unknown. It is not a new issue or a completed handoff.
+This walkthrough records navigation and a blocked handoff, not a successful contract test, integrated run, or gate decision.
 
 ## Architecture and contract changes
 

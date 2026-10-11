@@ -45,11 +45,11 @@ guarantee future or other-repository availability. For other cross-repository is
 
 No private reporting destination or responsible owner is confirmed. The security form is preserved as
 a draft at [`pending/security.yml`](pending/security.yml), outside the chooser; `config.yml` has no
-security contact link. The public GH-07 tracking issue is not a reporting destination. Do not activate
+security contact link. The public `GH-07` tracking issue is not a reporting destination. Do not activate
 or publish the draft until maintainers confirm the private route, access expectations and owner, then
 complete a synthetic private-route walkthrough. GitHub private vulnerability reporting is not claimed
 to be enabled. The five active forms do not satisfy the sixth-form or security-routing acceptance
-criteria; GH-03-I remains open.
+criteria; `GH-03-I` remains open.
 
 ## Source, destination and link checks
 

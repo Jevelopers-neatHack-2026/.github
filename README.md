@@ -4,9 +4,9 @@ This repository publishes shared contribution standards, governance records, con
 
 ## Current status
 
-At inspected public default-branch revision [e73eacf](https://github.com/Jevelopers-neatHack-2026/.github/commit/e73eacf85299d6d524d176b5c663f44cb7147f04), [PR #19](https://github.com/Jevelopers-neatHack-2026/.github/pull/19) merged the pull-request template and its adoption guide. The PR template contract is `GH-PR-TEMPLATE@1.0.0`; that interface version is separate from execution-policy pack 1.1.0, product releases, and destination adoption status. Recheck live repository state before relying on this dated snapshot.
+At inspected public default-branch revision [4129e71](https://github.com/Jevelopers-neatHack-2026/.github/commit/4129e71f42a51d42803b1020e146f54108cf2f93), observed 2026-10-11 02:48:39 UTC, [PR #19](https://github.com/Jevelopers-neatHack-2026/.github/pull/19) published the pull-request template and adoption guide, and [PR #20](https://github.com/Jevelopers-neatHack-2026/.github/pull/20) published five active issue forms plus a security draft outside the chooser. The PR template contract is `GH-PR-TEMPLATE@1.0.0`; the issue-form contract is `GH-ISSUE-FORMS@1.0.0`. Both interface versions are separate from execution-policy pack 1.1.0, product releases, and destination adoption status. Recheck live repository state before relying on this dated snapshot.
 
-The governance guidance work and six issue-form set remain under review separately. `GH-01` still needs its second-maintainer validation. `GH-07` remains blocked until a maintainer confirms a private security-reporting destination and responsible role. The issue-form chooser and security-routing checks remain pending that route and their default-branch review. No sensitive details should be sent through an ordinary public issue while the private route is unresolved.
+The remaining governance guidance work is still under review. `GH-01` still needs its second-maintainer validation. `GH-07` remains blocked until a maintainer confirms a private security-reporting destination and responsible role. Native previews of the five active issue-form candidates passed before merge; post-merge required-field interaction and destination-specific behavior remain unverified. The security form remains outside the chooser, and no sensitive details should be sent through an ordinary public issue while the private route is unresolved. `GH-03-I` remains open.
 
 The central workflow documentation and local fixture can be reviewed independently of a GitHub-hosted workflow run. This repository has no root `.github/workflows` installation; downstream workflow execution, private-workflow access, fork isolation, and secret behavior remain unverified unless separately supported by actual destination evidence.
 
@@ -24,6 +24,7 @@ The master acceptance IDs and their status are owned by integration-evals. A mer
 - [Reusable workflow design](automation-design/reusable-workflows.md) and the [workflow starter](workflow-templates/docs-check.yml)
 - [Repository bootstrap checklist](adoption/repository-bootstrap.md) and [adoption record](templates/adoption-record.md)
 - [Contributor templates and adoption guidance](templates/README.md), including the [pull-request template](.github/pull_request_template.md)
+- [Issue-form source and adoption guidance](templates/issue-forms.md)
 - [Repository profile](profile/README.md)
 
 ## Architecture and evidence ownership
@@ -36,7 +37,7 @@ Canonical architecture and the implementation plan live in getticketstub.com. Ca
 
 The pull-request template is a published source on this repository's public default branch. GitHub may use organization default community-health files when a destination repository has no local equivalent. Local files take precedence; inherited defaults do not appear in clones. See [template guidance](templates/README.md) for source visibility, local overrides, the versioned template contract, and per-repository adoption records.
 
-Agent instructions, CODEOWNERS, licenses, workflow callers, issue forms, labels, and repository settings require deliberate local decisions. These files do not install or configure them. Consult current, destination-specific evidence before claiming a setting, label, workflow, or template is active. Do not report organization-wide adoption from one repository's result.
+Agent instructions, CODEOWNERS, licenses, workflow callers, labels, and repository settings require deliberate local decisions. Public issue forms and pull-request templates may appear as organization defaults when a destination has no local equivalent, but a local template directory overrides them. Consult current, destination-specific evidence before claiming a setting, label, workflow, or template is active. Do not report organization-wide adoption from one repository's result.
 
 Use the [bootstrap record](templates/adoption-record.md) to capture source revision, destination revision, applicability, verification evidence, deviations, and blockers. Public `.github` defaults are not copied into clones, and a private `.github` repository is not a supported source for public organization community-health defaults.
 
@@ -44,5 +45,5 @@ Use the [bootstrap record](templates/adoption-record.md) to capture source revis
 
 - `GH-01` remains open until the required second-maintainer review is recorded.
 - `GH-07` security reporting remains blocked until a maintainer confirms the private destination and responsible role; no contact or response time is supplied here.
-- `GH-03-I` chooser rendering, safe-draft validation, and private security routing remain pending final form review and the confirmed route.
+- `GH-03-I` remains open: post-merge required-field interaction, destination-specific behavior, and the private security route are pending.
 - Per-repository settings and adoption, plus any GitHub-hosted workflow execution or secret-isolation evidence, require separate destination-specific observations.
