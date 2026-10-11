@@ -34,6 +34,12 @@ planned under [GH-10](https://github.com/Jevelopers-neatHack-2026/.github/issues
   Name the tested commit SHA. A mock pass is not evidence for a live-required outcome.
 - **Provider mode.** `mock`, `sandbox`, `live`, or `N/A — reason`. List components separately when a run
   mixes modes.
+- **Ownership & design.** Name the owning repository and role for every interface the change touches, and
+  link the design, ADR or catalog entry it follows. Write `N/A — reason` when none applies.
+- **Cross-repo impact.** State compatibility/migration steps and any version or tag published or consumed.
+  For a contract change, record which producers and consumers acknowledged it and where.
+- **Reviewer expectations.** Name the reviewer role the change needs. Reviewers check each ticked box
+  against its evidence; a ticked box alone is not proof.
 - **Security & provenance.** These boxes are the author's claims. A reviewer checks them; they do not
   prove that any scanner or rule ran.
 

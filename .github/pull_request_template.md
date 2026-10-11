@@ -14,6 +14,7 @@ Never paste secrets, tokens, signed URLs, customer data or exploit details here.
 <!-- Use "Closes owner/repo#N" only for issues this PR fully completes (all acceptance criteria met).
      Use "Refs owner/repo#M" for partial work, parents/epics and release gates. Release gates never close from a PR. -->
 Closes <owner/repo#N> · Refs <owner/repo#M>
+- **Issue key:** <e.g. GH-03-P, or N/A — reason>
 
 ## Scope / Non-goals
 - **In scope:** <what this PR does>
@@ -21,6 +22,10 @@ Closes <owner/repo#N> · Refs <owner/repo#M>
 
 ## Changes
 - <grouped, file/area-level bullets>
+
+## Ownership & design
+- **Affected ownership / interfaces:** <owning repo(s) and role(s), interfaces touched, or None>
+- **Design / ADR / catalog links:** <links, or N/A — reason>
 
 ## Acceptance criteria → evidence
 <!-- One line per criterion from the linked issue. Tick only criteria with evidence attached.
@@ -33,6 +38,8 @@ Closes <owner/repo#N> · Refs <owner/repo#M>
 - **Tested revision:** <full commit SHA>
 - **Executed:** <exact commands and their result; CI run link>
 - **Planned / not run:** <checks not executed and why, or "None">
+- **Limitations / skips:** <skipped tests, blocked providers, known gaps, or "None">
+- **Evidence links:** <sanitized URLs only: no tokens, signed URLs or customer data>
 - **Provider mode:** <mock | sandbox | live | N/A — reason> (list each component separately when mixed)
 
 ## Dependencies / blockers
@@ -42,6 +49,9 @@ Closes <owner/repo#N> · Refs <owner/repo#M>
 ## Cross-repo impact
 <!-- Contracts/versions consumed or published, affected producers/consumers and their acknowledgement; "None" if none. -->
 <None | details>
+- **Compatibility / migration:** <breaking changes and migration steps, or None>
+- **Release / version impact:** <versions or tags published or consumed, or None>
+- **Producer / consumer acknowledgement:** <for contract changes: who acknowledged and where, or N/A>
 
 ## Security & provenance
 - [ ] No secrets, tokens, credentials, signed URLs or customer data in the diff, fixtures, logs or screenshots.
@@ -50,3 +60,8 @@ Closes <owner/repo#N> · Refs <owner/repo#M>
 
 ## Risk & rollback
 <Risk level, what could break, how to revert.>
+
+## Reviewer expectations
+<!-- Reviewers check each ticked box against its evidence, confirm Closes is used only for fully met issues,
+     and confirm owners of affected interfaces (and contract consumers) have acknowledged. Name the reviewer role needed. -->
+- **Reviewer role(s) requested:** <e.g. owning-repo maintainer; contract consumer owner>
