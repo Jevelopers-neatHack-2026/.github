@@ -15,6 +15,7 @@ Documentation baseline only. Implementation and acceptance verification remain p
 - [Governance inventory and adoption gaps](adoption/governance-inventory.md)
 - [Architecture and diagrams](https://github.com/Jevelopers-neatHack-2026/getticketstub.com/blob/main/docs/architecture-kit/v1.0/README.md)
 - [Central implementation plan](https://github.com/Jevelopers-neatHack-2026/getticketstub.com/blob/main/docs/planning/implementation-plan.md)
+- [Contributor templates (pull request template and adoption)](templates/README.md)
 - [Contributor guidance](https://github.com/Jevelopers-neatHack-2026/.github/blob/main/CONTRIBUTING.md)
 
 Architecture integration documents the intended boundaries. It does not establish completed product functionality, passing implementation tests, connected sponsor tools, or live financial activity.
