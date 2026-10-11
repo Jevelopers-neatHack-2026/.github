@@ -15,10 +15,12 @@
       "source_refs": "Keys into source_catalog; each source supplies URL/path and commit revision or observation time.",
       "verification_ref": "Joins category_definitions.verification_method.",
       "observed_at": "Snapshot timestamp; repeated on each row so each disposition is independently dated.",
+      "existing_work_refs": "IDs in this repository existing_work list selected by the issue/PR body scope and its affected_artifact_category_ids; candidate or merged state is not adoption evidence.",
       "details": "Small repository-specific facts, not raw issue bodies or duplicate snapshots."
     },
-    "source_catalog": "Deduplicated GitHub source refs and evidence snapshot locations. Snapshot contents are stored outside the tracked repo.",
-    "repository_role": "Proposed responsibility from the maintained map. No named assignee, reviewer or adopter was confirmed."
+    "source_catalog": "Deduplicated GitHub source refs and evidence snapshot locations. Issue/PR API entries preserve all-state pagination sources; snapshot contents are stored outside the tracked repo.",
+    "repository_role": "Proposed responsibility from the maintained map. No named assignee, reviewer or adopter was confirmed.",
+    "existing_work_record": "Body-scoped issue/PR record with canonical source link, all-state snapshot source, status/draft/merge distinction and affected artifact category IDs. Body text is not duplicated."
   },
   "scope": {
     "organization": "Jevelopers-neatHack-2026",
@@ -44,7 +46,8 @@
     "content_vs_control": "Artifact content status and repository settings/control status are separate. A source file does not prove a setting is configured or a workflow executed.",
     "ownership": "Repository-map owner roles are proposed planning roles. No named owner, assignee, reviewer, security contact or adoption confirmation is inferred.",
     "evidence_bundle": "Read-only snapshots are outside the tracked repository at the supervisor run’s gh01-evidence/ directory; each record also provides GitHub source URLs and snapshot paths.",
-    "supplemental_content_review": "A follow-up read-only content scan fetched 24 additional maintained Markdown files at the same pinned default-branch revisions. The shared-contract catalog adds centrally applicable schema-version/compatibility guidance; other decision, contract, handoff, and security documents reviewed are product/runtime-domain materials, not shared repository-governance policy. The central work-package plan records planned tasks and dependencies, not completion or governance adoption. Pinned file refs and review hits are recorded in additional-doc-review.json outside the tracked repository."
+    "existing_work_reconciliation": "21 scoped issue/PR body findings from the independent review were joined to the saved all-state snapshots by repository, number, canonical URL, state, merged_at and body digest. No body text is copied. Each issue/PR is mapped to artifact categories that its body scope affects; central issue keys are retained separately for tracing to the planned leaf backlog. Candidate and merged records do not prove adoption or completion.",
+    "supplemental_content_review": "A content-level scan inspected all 126 maintained Markdown files in the complete frozen default-branch trees. The follow-up capture consists of 54 previously unselected Markdown files, each pinned to the original tree SHA and carrying its own retrieval time; these later reads do not revise the original API observation timestamp or issue/PR counts. The versioned getticketstub.com architecture kit contains partial exact-component pin, reproducible assembly, compatibility-check, release-record and workflow caller guidance; its repository brief 06 records planned .github ownership/adoption with delivery and checks still pending. The shared-contracts catalog provides partial schema-version compatibility guidance. team-dashboard has partial CI guidance in docs/integration/TD-11-ci.md and host-specific package pin/rollback/adoption instructions in docs/integration/mount-contract.md; these sources do not prove workflow execution or host adoption and do not constitute complete shared policy. The dated private-visibility statement in the architecture kit is preserved separately from current public metadata. The remaining reviewed decision, contract, handoff and security documents describe domain implementation/acceptance, and no additional reusable repository-governance policy was identified. The central work-package plan records planned tasks and dependencies, not completion or adoption. Detailed pinned source records and scan evidence are in additional-doc-review.json and full-markdown-review/ outside the tracked repository."
   },
   "coverage": {
     "mapped": 14,
@@ -58,7 +61,8 @@
     "issue_open_total": 241,
     "pull_request_total": 77,
     "pull_request_open_total": 15,
-    "access_failures": 0
+    "access_failures": 0,
+    "scoped_existing_work_ref_count": 21
   },
   "visibility_note": "The source map is dated 2026-10-10 and records private visibility for 13 entries. Current live API metadata at the later snapshot time reports all 14 public. Treat the map and ownership-file statements as date-scoped observations; this inventory does not claim those earlier records were false.",
   "inheritance_and_local_overrides": {
@@ -466,6 +470,24 @@
       "blob_sha": "e0df0794452497821673081ec999eb232d712b72",
       "evidence_snapshot": "implementation-plan.md"
     },
+    "api/marketing-material/repos/Jevelopers-neatHack-2026/marketing-material/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "marketing-material",
+      "path": "GET repos/Jevelopers-neatHack-2026/marketing-material/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/marketing-material/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/marketing-material/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/marketing-material/repos/Jevelopers-neatHack-2026/marketing-material/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "marketing-material",
+      "path": "GET repos/Jevelopers-neatHack-2026/marketing-material/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/marketing-material/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/marketing-material/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
     "file/marketing-material/f27890ff4dcce0c0059035d8cad63a1367c5dfd4": {
       "kind": "git_blob",
       "repository": "marketing-material",
@@ -518,7 +540,8 @@
       "url": "https://github.com/Jevelopers-neatHack-2026/shared-contracts/blob/c4caaccc2ea63b273eeac17ed89af8ac64f6bbde/docs/contract-catalog.md",
       "revision": "c4caaccc2ea63b273eeac17ed89af8ac64f6bbde",
       "blob_sha": "e210b82d23f58ea218ecd79f10339bd8e7205722",
-      "evidence_snapshot": "repos/shared-contracts/additional-review/docs/contract-catalog.md"
+      "evidence_snapshot": "repos/shared-contracts/additional-review/docs/contract-catalog.md",
+      "retrieved_at": "2026-10-11T01:48:52Z"
     },
     "file/getticketstub.com/f9ff262959f5b04c72a07b70b336dd1c4aefa08a": {
       "kind": "git_blob",
@@ -573,6 +596,24 @@
       "revision": "ff1f6d2df816ebbff34742f51be728fcb5c28cb5",
       "blob_sha": "d4d3f65b2cbc5529798b88bcc4319f99ebaeaf6c",
       "evidence_snapshot": "repos/integration-evals/files/planning/acceptance-checklist.json"
+    },
+    "api/agent-harness/repos/Jevelopers-neatHack-2026/agent-harness/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "agent-harness",
+      "path": "GET repos/Jevelopers-neatHack-2026/agent-harness/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/agent-harness/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/agent-harness/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/agent-harness/repos/Jevelopers-neatHack-2026/agent-harness/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "agent-harness",
+      "path": "GET repos/Jevelopers-neatHack-2026/agent-harness/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/agent-harness/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/agent-harness/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
     },
     "file/agent-harness/585aa2054833a54f1f7208fc42e83592ba7d6b35": {
       "kind": "git_blob",
@@ -673,6 +714,24 @@
       "blob_sha": "2c2c73428f3e614629f927d082405f4f34b03699",
       "evidence_snapshot": "repos/agent-harness/files/docs/evidence-and-provenance.md"
     },
+    "api/getticketstub.com/repos/Jevelopers-neatHack-2026/getticketstub.com/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "getticketstub.com",
+      "path": "GET repos/Jevelopers-neatHack-2026/getticketstub.com/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/getticketstub.com/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/getticketstub.com/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/getticketstub.com/repos/Jevelopers-neatHack-2026/getticketstub.com/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "getticketstub.com",
+      "path": "GET repos/Jevelopers-neatHack-2026/getticketstub.com/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/getticketstub.com/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/getticketstub.com/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
     "file/getticketstub.com/6b783103ce676769dd0d0f3a91e9de2257fd6047": {
       "kind": "git_blob",
       "repository": "getticketstub.com",
@@ -708,6 +767,15 @@
       "revision": "7f59d33922a0585205547d490b288b49eed32419",
       "blob_sha": "74f5646ad94780c382236a9e5c16f7f56785a84d",
       "evidence_snapshot": "repos/getticketstub.com/files/.github/workflows/runtime.yml"
+    },
+    "file/getticketstub.com/a8000deb91af29f2a653d5fdbc75bbe60051ef7b": {
+      "kind": "git_blob",
+      "repository": "getticketstub.com",
+      "path": "docs/architecture-kit/v1.0/docs/architecture.md",
+      "url": "https://github.com/Jevelopers-neatHack-2026/getticketstub.com/blob/7f59d33922a0585205547d490b288b49eed32419/docs/architecture-kit/v1.0/docs/architecture.md",
+      "revision": "7f59d33922a0585205547d490b288b49eed32419",
+      "blob_sha": "a8000deb91af29f2a653d5fdbc75bbe60051ef7b",
+      "evidence_snapshot": "repos/getticketstub.com/files/docs/architecture-kit/v1.0/docs/architecture.md"
     },
     "api/getticketstub.com/repos/Jevelopers-neatHack-2026/getticketstub.com/labels?per_page=100": {
       "kind": "github_api",
@@ -763,6 +831,15 @@
       "blob_sha": "ae1c0480ba2b39c2399bc4065ec40b6d7e6657e9",
       "evidence_snapshot": "repos/getticketstub.com/files/docs/architecture/OWNERSHIP.md"
     },
+    "file/getticketstub.com/d62099e98c47924847d93af00f3b8cb6bfa08bfc": {
+      "kind": "git_blob",
+      "repository": "getticketstub.com",
+      "path": "docs/architecture-kit/v1.0/repository-briefs/06-github-governance.md",
+      "url": "https://github.com/Jevelopers-neatHack-2026/getticketstub.com/blob/7f59d33922a0585205547d490b288b49eed32419/docs/architecture-kit/v1.0/repository-briefs/06-github-governance.md",
+      "revision": "7f59d33922a0585205547d490b288b49eed32419",
+      "blob_sha": "d62099e98c47924847d93af00f3b8cb6bfa08bfc",
+      "evidence_snapshot": "repos/getticketstub.com/files/docs/architecture-kit/v1.0/repository-briefs/06-github-governance.md"
+    },
     "file/getticketstub.com/3fb59c3e05126e1cea86bc2a70f4dde74020cc49": {
       "kind": "git_blob",
       "repository": "getticketstub.com",
@@ -780,6 +857,24 @@
       "revision": "7f59d33922a0585205547d490b288b49eed32419",
       "blob_sha": "40cb8f4ba98f9b3417a7a1dfb0233307f503be7d",
       "evidence_snapshot": "repos/getticketstub.com/files/docs/architecture-kit/v1.0/planning/acceptance-checklist.md"
+    },
+    "api/brand-kit/repos/Jevelopers-neatHack-2026/brand-kit/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "brand-kit",
+      "path": "GET repos/Jevelopers-neatHack-2026/brand-kit/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/brand-kit/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/brand-kit/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/brand-kit/repos/Jevelopers-neatHack-2026/brand-kit/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "brand-kit",
+      "path": "GET repos/Jevelopers-neatHack-2026/brand-kit/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/brand-kit/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/brand-kit/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
     },
     "file/brand-kit/d6c4393affe7cca604e3227b05e5694de3273242": {
       "kind": "git_blob",
@@ -853,6 +948,24 @@
       "blob_sha": "d4cb457f8a46c272b255eb39a199313fa76d9254",
       "evidence_snapshot": "repos/brand-kit/files/docs/architecture/OWNERSHIP.md"
     },
+    "api/landing-page-repo/repos/Jevelopers-neatHack-2026/landing-page-repo/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "landing-page-repo",
+      "path": "GET repos/Jevelopers-neatHack-2026/landing-page-repo/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/landing-page-repo/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/landing-page-repo/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/landing-page-repo/repos/Jevelopers-neatHack-2026/landing-page-repo/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "landing-page-repo",
+      "path": "GET repos/Jevelopers-neatHack-2026/landing-page-repo/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/landing-page-repo/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/landing-page-repo/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
     "file/landing-page-repo/e5152e63f222e64f4a483e1f9539404c216abb04": {
       "kind": "git_blob",
       "repository": "landing-page-repo",
@@ -924,6 +1037,24 @@
       "revision": "3f28c8ac691374614354a8e53c1a2520e8c7854c",
       "blob_sha": "982ebed35ba94487ce8da662bcd8098fcf215da3",
       "evidence_snapshot": "repos/landing-page-repo/files/docs/architecture/OWNERSHIP.md"
+    },
+    "api/.github/repos/Jevelopers-neatHack-2026/.github/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": ".github",
+      "path": "GET repos/Jevelopers-neatHack-2026/.github/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/.github/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/.github/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/.github/repos/Jevelopers-neatHack-2026/.github/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": ".github",
+      "path": "GET repos/Jevelopers-neatHack-2026/.github/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/.github/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/.github/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
     },
     "file/.github/ae87401708cc58ce14b56ecc5c2dbe8c01178a37": {
       "kind": "git_blob",
@@ -997,6 +1128,24 @@
       "blob_sha": "9406f30a652fb45819602d91cc43484ceba29c95",
       "evidence_snapshot": "repos/.github/files/docs/architecture/OWNERSHIP.md"
     },
+    "api/shared-contracts/repos/Jevelopers-neatHack-2026/shared-contracts/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "shared-contracts",
+      "path": "GET repos/Jevelopers-neatHack-2026/shared-contracts/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/shared-contracts/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/shared-contracts/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/shared-contracts/repos/Jevelopers-neatHack-2026/shared-contracts/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "shared-contracts",
+      "path": "GET repos/Jevelopers-neatHack-2026/shared-contracts/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/shared-contracts/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/shared-contracts/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
     "file/shared-contracts/e42cb6c819349c1a61c06e8fd46fc52c7a4ca721": {
       "kind": "git_blob",
       "repository": "shared-contracts",
@@ -1069,6 +1218,24 @@
       "blob_sha": "c8d08666491eabfd48af82781c3f8c1e385984e1",
       "evidence_snapshot": "repos/shared-contracts/files/docs/architecture/OWNERSHIP.md"
     },
+    "api/event-intelligence/repos/Jevelopers-neatHack-2026/event-intelligence/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "event-intelligence",
+      "path": "GET repos/Jevelopers-neatHack-2026/event-intelligence/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/event-intelligence/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/event-intelligence/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/event-intelligence/repos/Jevelopers-neatHack-2026/event-intelligence/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "event-intelligence",
+      "path": "GET repos/Jevelopers-neatHack-2026/event-intelligence/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/event-intelligence/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/event-intelligence/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
     "file/event-intelligence/c9636b591e54f119146454aebf3ba82347ef84dd": {
       "kind": "git_blob",
       "repository": "event-intelligence",
@@ -1103,7 +1270,8 @@
       "url": "https://github.com/Jevelopers-neatHack-2026/event-intelligence/blob/fdc827d6c0be1508c94666a1cbfc0e5b73b49de7/docs/security/asset-permissions.md",
       "revision": "fdc827d6c0be1508c94666a1cbfc0e5b73b49de7",
       "blob_sha": "86462797b5962dfdc68fba6f1201787f06da471e",
-      "evidence_snapshot": "repos/event-intelligence/additional-review/docs/security/asset-permissions.md"
+      "evidence_snapshot": "repos/event-intelligence/additional-review/docs/security/asset-permissions.md",
+      "retrieved_at": "2026-10-11T01:48:52Z"
     },
     "file/event-intelligence/997cbabc0d9bc69348d0318d42501206067ba4ff": {
       "kind": "git_blob",
@@ -1112,7 +1280,8 @@
       "url": "https://github.com/Jevelopers-neatHack-2026/event-intelligence/blob/fdc827d6c0be1508c94666a1cbfc0e5b73b49de7/docs/security/controlled-retrieval.md",
       "revision": "fdc827d6c0be1508c94666a1cbfc0e5b73b49de7",
       "blob_sha": "997cbabc0d9bc69348d0318d42501206067ba4ff",
-      "evidence_snapshot": "repos/event-intelligence/additional-review/docs/security/controlled-retrieval.md"
+      "evidence_snapshot": "repos/event-intelligence/additional-review/docs/security/controlled-retrieval.md",
+      "retrieved_at": "2026-10-11T01:48:52Z"
     },
     "file/event-intelligence/6cd82bb195d5f05884566a7451dbba25adc98976": {
       "kind": "git_blob",
@@ -1121,7 +1290,8 @@
       "url": "https://github.com/Jevelopers-neatHack-2026/event-intelligence/blob/fdc827d6c0be1508c94666a1cbfc0e5b73b49de7/docs/security/safe-assets.md",
       "revision": "fdc827d6c0be1508c94666a1cbfc0e5b73b49de7",
       "blob_sha": "6cd82bb195d5f05884566a7451dbba25adc98976",
-      "evidence_snapshot": "repos/event-intelligence/additional-review/docs/security/safe-assets.md"
+      "evidence_snapshot": "repos/event-intelligence/additional-review/docs/security/safe-assets.md",
+      "retrieved_at": "2026-10-11T01:48:52Z"
     },
     "file/event-intelligence/8cf1b2b9975a1065a5eacf3fe4b34d92cf7395f6": {
       "kind": "git_blob",
@@ -1312,6 +1482,24 @@
       "blob_sha": "548e699ee2a46ece93ab62e6e4718af14f52ead1",
       "evidence_snapshot": "repos/event-intelligence/files/docs/evidence/provenance-store.md"
     },
+    "api/creative-engine/repos/Jevelopers-neatHack-2026/creative-engine/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "creative-engine",
+      "path": "GET repos/Jevelopers-neatHack-2026/creative-engine/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/creative-engine/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/creative-engine/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/creative-engine/repos/Jevelopers-neatHack-2026/creative-engine/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "creative-engine",
+      "path": "GET repos/Jevelopers-neatHack-2026/creative-engine/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/creative-engine/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/creative-engine/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
     "file/creative-engine/4f05e8b9e6f97506098bce6007ad7ea11aafe730": {
       "kind": "git_blob",
       "repository": "creative-engine",
@@ -1429,6 +1617,24 @@
       "blob_sha": "667a6b572fba585b15789cecf0d11d9fae1578be",
       "evidence_snapshot": "repos/creative-engine/files/docs/usage-trace-evidence.md"
     },
+    "api/print-production/repos/Jevelopers-neatHack-2026/print-production/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "print-production",
+      "path": "GET repos/Jevelopers-neatHack-2026/print-production/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/print-production/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/print-production/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/print-production/repos/Jevelopers-neatHack-2026/print-production/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "print-production",
+      "path": "GET repos/Jevelopers-neatHack-2026/print-production/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/print-production/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/print-production/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
     "file/print-production/30a31e6c7c27dc1f61eeb03162ee7aee1d0c7b00": {
       "kind": "git_blob",
       "repository": "print-production",
@@ -1500,6 +1706,24 @@
       "revision": "24fb18a1fc54d34ce71e99a2162d62ebca3a52cd",
       "blob_sha": "ac06ecec2a6a994a79fbae40a131e20018fd053e",
       "evidence_snapshot": "repos/print-production/files/docs/architecture/OWNERSHIP.md"
+    },
+    "api/fulfillment-connectors/repos/Jevelopers-neatHack-2026/fulfillment-connectors/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "fulfillment-connectors",
+      "path": "GET repos/Jevelopers-neatHack-2026/fulfillment-connectors/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/fulfillment-connectors/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/fulfillment-connectors/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/fulfillment-connectors/repos/Jevelopers-neatHack-2026/fulfillment-connectors/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "fulfillment-connectors",
+      "path": "GET repos/Jevelopers-neatHack-2026/fulfillment-connectors/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/fulfillment-connectors/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/fulfillment-connectors/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
     },
     "file/fulfillment-connectors/a1211905efe524936d72719ebaf473c347b20bf8": {
       "kind": "git_blob",
@@ -1591,6 +1815,24 @@
       "blob_sha": "399df5b092c01a67e4cbcb2056473b0d6ffe4e90",
       "evidence_snapshot": "repos/fulfillment-connectors/files/docs/architecture/OWNERSHIP.md"
     },
+    "api/cost-intelligence/repos/Jevelopers-neatHack-2026/cost-intelligence/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "cost-intelligence",
+      "path": "GET repos/Jevelopers-neatHack-2026/cost-intelligence/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/cost-intelligence/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/cost-intelligence/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/cost-intelligence/repos/Jevelopers-neatHack-2026/cost-intelligence/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "cost-intelligence",
+      "path": "GET repos/Jevelopers-neatHack-2026/cost-intelligence/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/cost-intelligence/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/cost-intelligence/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
     "file/cost-intelligence/c7a67cb2b72977b44974d603dc942efcd4b6e7ef": {
       "kind": "git_blob",
       "repository": "cost-intelligence",
@@ -1663,6 +1905,24 @@
       "blob_sha": "809b34f6b172b39ef34e4ea9443ebdcf34b17de5",
       "evidence_snapshot": "repos/cost-intelligence/files/docs/architecture/OWNERSHIP.md"
     },
+    "api/team-dashboard/repos/Jevelopers-neatHack-2026/team-dashboard/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "team-dashboard",
+      "path": "GET repos/Jevelopers-neatHack-2026/team-dashboard/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/team-dashboard/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/team-dashboard/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/team-dashboard/repos/Jevelopers-neatHack-2026/team-dashboard/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "team-dashboard",
+      "path": "GET repos/Jevelopers-neatHack-2026/team-dashboard/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/team-dashboard/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/team-dashboard/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
     "file/team-dashboard/5a5630042f5ce99f8a758bd68548109b04d6a6ce": {
       "kind": "git_blob",
       "repository": "team-dashboard",
@@ -1699,6 +1959,16 @@
       "blob_sha": "41216297ee194f964b7fcd61771e82f7288b26c7",
       "evidence_snapshot": "repos/team-dashboard/files/.github/workflows/dashboard-validation.yml"
     },
+    "file/team-dashboard/bf01806eeebc29e96c5bb6b24e99003470a43c36": {
+      "kind": "git_blob",
+      "repository": "team-dashboard",
+      "path": "docs/integration/TD-11-ci.md",
+      "url": "https://github.com/Jevelopers-neatHack-2026/team-dashboard/blob/72ad0fc4fada5bd334f5bf24d29835d26647a972/docs/integration/TD-11-ci.md",
+      "revision": "72ad0fc4fada5bd334f5bf24d29835d26647a972",
+      "blob_sha": "bf01806eeebc29e96c5bb6b24e99003470a43c36",
+      "evidence_snapshot": "repos/team-dashboard/additional-review/docs/integration/TD-11-ci.md",
+      "retrieved_at": "2026-10-11T02:00:26Z"
+    },
     "api/team-dashboard/repos/Jevelopers-neatHack-2026/team-dashboard/labels?per_page=100": {
       "kind": "github_api",
       "repository": "team-dashboard",
@@ -1707,6 +1977,16 @@
       "observed_at": "2026-10-11T01:33:25Z",
       "evidence_snapshot": "repos/team-dashboard/labels.json",
       "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "file/team-dashboard/9c329dbcf3a835b2892769ee9c78cf19b753ea8a": {
+      "kind": "git_blob",
+      "repository": "team-dashboard",
+      "path": "docs/integration/mount-contract.md",
+      "url": "https://github.com/Jevelopers-neatHack-2026/team-dashboard/blob/72ad0fc4fada5bd334f5bf24d29835d26647a972/docs/integration/mount-contract.md",
+      "revision": "72ad0fc4fada5bd334f5bf24d29835d26647a972",
+      "blob_sha": "9c329dbcf3a835b2892769ee9c78cf19b753ea8a",
+      "evidence_snapshot": "repos/team-dashboard/additional-review/docs/integration/mount-contract.md",
+      "retrieved_at": "2026-10-11T01:48:52Z"
     },
     "api/team-dashboard/repos/Jevelopers-neatHack-2026/team-dashboard/releases?per_page=100": {
       "kind": "github_api",
@@ -1743,6 +2023,24 @@
       "revision": "72ad0fc4fada5bd334f5bf24d29835d26647a972",
       "blob_sha": "a0c8401cb74b1a33d9c4c93650e01e4356d8d0af",
       "evidence_snapshot": "repos/team-dashboard/files/docs/architecture/OWNERSHIP.md"
+    },
+    "api/integration-evals/repos/Jevelopers-neatHack-2026/integration-evals/issues?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "integration-evals",
+      "path": "GET repos/Jevelopers-neatHack-2026/integration-evals/issues?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/integration-evals/issues?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/integration-evals/issues.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
+    },
+    "api/integration-evals/repos/Jevelopers-neatHack-2026/integration-evals/pulls?state=all&per_page=100": {
+      "kind": "github_api",
+      "repository": "integration-evals",
+      "path": "GET repos/Jevelopers-neatHack-2026/integration-evals/pulls?state=all&per_page=100",
+      "url": "https://api.github.com/repos/Jevelopers-neatHack-2026/integration-evals/pulls?state=all&per_page=100",
+      "observed_at": "2026-10-11T01:33:25Z",
+      "evidence_snapshot": "repos/integration-evals/pulls.json",
+      "retrieval": "read-only; paginated with per_page=100 where the endpoint is a collection"
     },
     "file/integration-evals/7983caf4213f2fd39daf2a08c4d4e50552669648": {
       "kind": "git_blob",
@@ -1911,7 +2209,8 @@
           "title": "[P0 MM-09] Gate collateral v1 on coverage, reviewed exports, and evidence",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/marketing-material/issues/3",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/marketing-material/repos/Jevelopers-neatHack-2026/marketing-material/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 2,
@@ -1919,10 +2218,113 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:54:38Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/marketing-material/pull/2",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/marketing-material/repos/Jevelopers-neatHack-2026/marketing-material/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [
+          {
+            "id": "marketing-material:issue:5",
+            "kind": "issue",
+            "number": 5,
+            "title": "[P0 MM-02] Define evidence-backed messaging and approved-claim references",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/marketing-material/issues/5",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-10T20:22:10Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Approved-claim ledger, immutable evidence links, evidence classification and completion-claim review",
+            "central_issue_keys": [
+              "GH-08"
+            ],
+            "affected_artifact_category_ids": [
+              "acceptance_evidence"
+            ],
+            "body_sha256": "3e49c7b9b83909f81fae92b650cfad99fd5dd2aa0125e66fa1aa4743a0eb4639",
+            "source_snapshot": "gh01-evidence/repos/marketing-material/issues.json",
+            "source_ref": "api/marketing-material/repos/Jevelopers-neatHack-2026/marketing-material/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "marketing-material:issue:6",
+            "kind": "issue",
+            "number": 6,
+            "title": "[P0 MM-05] Track asset provenance, publication rights, and redaction",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/marketing-material/issues/6",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-10T20:22:33Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Publication provenance/redaction review, secret-history inspection and confirmed private reporting-path dependency",
+            "central_issue_keys": [
+              "GH-07",
+              "GH-08"
+            ],
+            "affected_artifact_category_ids": [
+              "security_reporting",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "c8817c1135a9a75f4d99d510c888d9b86deac785d021281b842383033f768a5e",
+            "source_snapshot": "gh01-evidence/repos/marketing-material/issues.json",
+            "source_ref": "api/marketing-material/repos/Jevelopers-neatHack-2026/marketing-material/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "marketing-material:issue:11",
+            "kind": "issue",
+            "number": 11,
+            "title": "[P1 MM-07] Package versioned collateral exports and teammate handoff",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/marketing-material/issues/11",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-10T20:07:30Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Versioned collateral release manifest, checksums, status/approval transitions and reproducible teammate handoff",
+            "central_issue_keys": [
+              "GH-02-R",
+              "GH-08"
+            ],
+            "affected_artifact_category_ids": [
+              "release_versioning",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "6d09ff7900ceeee8b89b398e5392c51180cbb4644c4d8dccb92e563a93bd1042",
+            "source_snapshot": "gh01-evidence/repos/marketing-material/issues.json",
+            "source_ref": "api/marketing-material/repos/Jevelopers-neatHack-2026/marketing-material/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "marketing-material:pull_request:13",
+            "kind": "pull_request",
+            "number": 13,
+            "title": "Add draft collateral with claim, provenance and accessibility checks",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/marketing-material/pull/13",
+            "draft": false,
+            "merged_at": null,
+            "updated_at": "2026-10-11T01:28:53Z",
+            "disposition": "open_candidate_unverified",
+            "governance_or_adopter_scope": "Open partial claim/provenance/release-check candidate related to issues 5/6; preserve draft/blocked limitations",
+            "central_issue_keys": [
+              "GH-07",
+              "GH-08"
+            ],
+            "affected_artifact_category_ids": [
+              "security_reporting",
+              "release_versioning",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "aea0b6d132cb28b710574a68921cfd1ee5150829667c565cab84ffc05c90ba2d",
+            "source_snapshot": "gh01-evidence/repos/marketing-material/pulls.json",
+            "source_ref": "api/marketing-material/repos/Jevelopers-neatHack-2026/marketing-material/pulls?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          }
+        ],
+        "issues_source_ref": "api/marketing-material/repos/Jevelopers-neatHack-2026/marketing-material/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/marketing-material/repos/Jevelopers-neatHack-2026/marketing-material/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -1939,6 +2341,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -1960,6 +2363,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -1980,6 +2384,7 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -2003,6 +2408,10 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "marketing-material:issue:6",
+            "marketing-material:pull_request:13"
+          ],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -2026,6 +2435,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -2047,6 +2457,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -2066,6 +2477,7 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [],
             "workflow_guidance_paths": [],
@@ -2086,6 +2498,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 10,
@@ -2122,8 +2535,15 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "marketing-material:issue:11",
+            "marketing-material:pull_request:13"
+          ],
           "details": {
             "local_material_paths": [],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -2153,6 +2573,7 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -2177,6 +2598,12 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "marketing-material:issue:5",
+            "marketing-material:issue:6",
+            "marketing-material:issue:11",
+            "marketing-material:pull_request:13"
+          ],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md"
@@ -2262,7 +2689,8 @@
           "title": "[P0 ACV1-RELEASE-GATE] Verify Agent & Creative v1 across pinned repositories and specialist evidence gates",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/agent-harness/issues/24",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/agent-harness/repos/Jevelopers-neatHack-2026/agent-harness/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 2,
@@ -2270,10 +2698,13 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:54:47Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/agent-harness/pull/2",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/agent-harness/repos/Jevelopers-neatHack-2026/agent-harness/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [],
+        "issues_source_ref": "api/agent-harness/repos/Jevelopers-neatHack-2026/agent-harness/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/agent-harness/repos/Jevelopers-neatHack-2026/agent-harness/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -2290,6 +2721,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -2311,6 +2743,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -2331,6 +2764,7 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -2354,6 +2788,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -2377,6 +2812,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -2398,6 +2834,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -2419,6 +2856,7 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [
               ".github/workflows/provider-readiness.yml",
@@ -2442,6 +2880,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 19,
@@ -2487,8 +2926,12 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_material_paths": [],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -2518,6 +2961,7 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -2543,6 +2987,7 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -2637,7 +3082,8 @@
           "title": "[P0 GT-12] Gate the customer application v1 release on integrated journey evidence",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/getticketstub.com/issues/6",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/getticketstub.com/repos/Jevelopers-neatHack-2026/getticketstub.com/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 2,
@@ -2645,10 +3091,62 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:54:57Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/getticketstub.com/pull/2",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/getticketstub.com/repos/Jevelopers-neatHack-2026/getticketstub.com/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [
+          {
+            "id": "getticketstub.com:issue:19",
+            "kind": "issue",
+            "number": 19,
+            "title": "[P0 GT-10B] Assemble pinned specialist modules and verify the product journey through real application adapters",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/getticketstub.com/issues/19",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-10T20:21:52Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Only the tested dependency/migration assembly manifest, exact component pins and setup/rollback handoff portions",
+            "central_issue_keys": [
+              "GH-02-R",
+              "GH-10"
+            ],
+            "affected_artifact_category_ids": [
+              "release_versioning",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "fa2bd59f498d9580ff4a04f722ad26e34be2fb914f9526cf5569bf53172b996b",
+            "source_snapshot": "gh01-evidence/repos/getticketstub.com/issues.json",
+            "source_ref": "api/getticketstub.com/repos/Jevelopers-neatHack-2026/getticketstub.com/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "getticketstub.com:pull_request:4",
+            "kind": "pull_request",
+            "number": 4,
+            "title": "Add ticket studio design docs and architecture alignment",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/getticketstub.com/pull/4",
+            "draft": false,
+            "merged_at": null,
+            "updated_at": "2026-10-10T09:32:11Z",
+            "disposition": "open_candidate_unverified",
+            "governance_or_adopter_scope": "Open architecture-alignment/ownership proposal supporting brand link repair; design claims remain proposed",
+            "central_issue_keys": [
+              "GH-09"
+            ],
+            "affected_artifact_category_ids": [
+              "architecture_links"
+            ],
+            "body_sha256": "59fcc71288d7efec4c3d30f0fdb172bd863f54b311f7a67743dcf185dd13a86c",
+            "source_snapshot": "gh01-evidence/repos/getticketstub.com/pulls.json",
+            "source_ref": "api/getticketstub.com/repos/Jevelopers-neatHack-2026/getticketstub.com/pulls?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          }
+        ],
+        "issues_source_ref": "api/getticketstub.com/repos/Jevelopers-neatHack-2026/getticketstub.com/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/getticketstub.com/repos/Jevelopers-neatHack-2026/getticketstub.com/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -2665,6 +3163,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -2686,6 +3185,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -2706,6 +3206,7 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -2729,6 +3230,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -2752,6 +3254,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -2773,6 +3276,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -2782,22 +3286,26 @@
           "category_id": "workflows",
           "status": "present",
           "owner_role": "Product and frontend",
-          "exact_gap": "1 repository-local workflow source(s) exist. Central reusable-workflow and permission guidance has not yet been adopted here. Actions repository controls were read only for `.github`; this repository’s Actions settings and workflow runs are unknown.",
+          "exact_gap": "1 repository-local workflow source(s) exist (1 separately named guidance file(s)). The versioned architecture kit §8 gives partial guidance on public reusable-workflow caller visibility, explicit caller workflows and full-SHA pins; no reusable workflow source or successful run is evidenced. Actions repository controls were read only for `.github`; this repository’s Actions settings and workflow runs are unknown.",
           "implementation_issue_keys": [
             "GH-06",
             "GH-10"
           ],
           "source_refs": [
             "tree/getticketstub.com/7f59d33922a0585205547d490b288b49eed32419",
-            "file/getticketstub.com/74f5646ad94780c382236a9e5c16f7f56785a84d"
+            "file/getticketstub.com/74f5646ad94780c382236a9e5c16f7f56785a84d",
+            "file/getticketstub.com/a8000deb91af29f2a653d5fdbc75bbe60051ef7b"
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [
               ".github/workflows/runtime.yml"
             ],
-            "workflow_guidance_paths": [],
+            "workflow_guidance_paths": [
+              "docs/architecture-kit/v1.0/docs/architecture.md"
+            ],
             "workflow_call_sources": [],
             "actions_settings": "unknown"
           }
@@ -2815,6 +3323,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 16,
@@ -2843,7 +3352,7 @@
           "category_id": "release_versioning",
           "status": "present",
           "owner_role": "Product and frontend",
-          "exact_gap": "The shared CONTRIBUTING baseline has partial release-handoff language. The central `shared-contracts/docs/contract-catalog.md` defines `schema_version` and compatibility acceptance (reject unsupported major versions, allow additive fields, retain old-consumer compatibility, and review producers and consumers); a versioned copy is also present in the architecture kit. This is contract-version guidance, not package release policy. No reusable package release/version rules or tested-revision manifest schema is established. This repository also has domain material at docs/architecture-kit/v1.0/CHANGELOG.md, which does not establish a general package release policy. GitHub reports 0 release(s) and 0 tag(s); these counts do not establish a policy or acceptance. Existing local release gate getticketstub.com#6 is open and remains open.",
+          "exact_gap": "The shared CONTRIBUTING baseline has partial release-handoff language. The central `shared-contracts/docs/contract-catalog.md` defines `schema_version` and compatibility acceptance (reject unsupported major versions, allow additive fields, retain old-consumer compatibility, and review producers and consumers); a versioned copy is also present in the architecture kit. This is contract-version guidance, not package release policy. No reusable package release/version rules or tested-revision manifest schema is established. `docs/architecture-kit/v1.0/docs/architecture.md` provides partial exact-component pin, reproducible assembly, compatibility-check and release-record guidance. It is not a complete reusable package policy or tested-revision manifest. Other local material at docs/architecture-kit/v1.0/CHANGELOG.md does not by itself establish the missing policy. GitHub reports 0 release(s) and 0 tag(s); these counts do not establish a policy or acceptance. Existing local release gate getticketstub.com#6 is open and remains open.",
           "implementation_issue_keys": [
             "GH-02-R",
             "GH-08"
@@ -2853,15 +3362,23 @@
             "file/shared-contracts/e210b82d23f58ea218ecd79f10339bd8e7205722",
             "file/getticketstub.com/f9ff262959f5b04c72a07b70b336dd1c4aefa08a",
             "file/getticketstub.com/c2ee29559e08235dfaa0ebef34d30aada360b25c",
+            "file/getticketstub.com/a8000deb91af29f2a653d5fdbc75bbe60051ef7b",
             "api/getticketstub.com/repos/Jevelopers-neatHack-2026/getticketstub.com/releases?per_page=100",
             "api/getticketstub.com/repos/Jevelopers-neatHack-2026/getticketstub.com/tags?per_page=100"
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "getticketstub.com:issue:19"
+          ],
           "details": {
             "local_material_paths": [
-              "docs/architecture-kit/v1.0/CHANGELOG.md"
+              "docs/architecture-kit/v1.0/CHANGELOG.md",
+              "docs/architecture-kit/v1.0/docs/architecture.md"
             ],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -2879,7 +3396,7 @@
           "category_id": "architecture_links",
           "status": "present",
           "owner_role": "Product and frontend",
-          "exact_gap": "Local architecture kit, ownership, acceptance, distribution manifest and report exist. The root README central architecture/plan links use mutable `main` refs; OWNERSHIP.md records public visibility on October 10, 2026.",
+          "exact_gap": "The versioned architecture kit contains partial GitHub governance and reproducible assembly guidance; repository brief 06 outlines proposed ownership and an adoption checklist but explicitly marks delivery as planning only with checks pending. Section 8 still reports `.github` private; preserve that as a dated statement and compare with current public metadata. The root README central architecture/plan links use mutable `main` refs; local OWNERSHIP.md records public visibility on October 10, 2026.",
           "implementation_issue_keys": [
             "GH-09",
             "GH-01"
@@ -2887,10 +3404,15 @@
           "source_refs": [
             "file/getticketstub.com/6b783103ce676769dd0d0f3a91e9de2257fd6047",
             "file/getticketstub.com/29c45ae287c455f11d7b932b9b6dbe9a3f4e5db7",
-            "file/getticketstub.com/ae1c0480ba2b39c2399bc4065ec40b6d7e6657e9"
+            "file/getticketstub.com/ae1c0480ba2b39c2399bc4065ec40b6d7e6657e9",
+            "file/getticketstub.com/a8000deb91af29f2a653d5fdbc75bbe60051ef7b",
+            "file/getticketstub.com/d62099e98c47924847d93af00f3b8cb6bfa08bfc"
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "getticketstub.com:pull_request:4"
+          ],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -2917,6 +3439,9 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "getticketstub.com:issue:19"
+          ],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture-kit/v1.0/planning/acceptance-checklist.json",
@@ -3001,7 +3526,8 @@
           "title": "[P0 BK-10] Gate brand-kit v1 on approved assets, reproducible exports and consumer evidence",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/brand-kit/issues/5",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/brand-kit/repos/Jevelopers-neatHack-2026/brand-kit/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 1,
@@ -3009,10 +3535,115 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:53:13Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/brand-kit/pull/1",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/brand-kit/repos/Jevelopers-neatHack-2026/brand-kit/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [
+          {
+            "id": "brand-kit:issue:8",
+            "kind": "issue",
+            "number": 8,
+            "title": "[P0 BK-07] Establish brand proposal, approval and change governance",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/brand-kit/issues/8",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-10T20:11:22Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Brand proposal/review/change governance, named approvals, rollback/revocation and explicit manual-control boundaries",
+            "central_issue_keys": [
+              "GH-02",
+              "GH-10"
+            ],
+            "affected_artifact_category_ids": [
+              "contributing",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "531946a940f6d0152ac698758f1574f7891ba6578aa8e70d2b12e88f6140c66e",
+            "source_snapshot": "gh01-evidence/repos/brand-kit/issues.json",
+            "source_ref": "api/brand-kit/repos/Jevelopers-neatHack-2026/brand-kit/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "brand-kit:issue:14",
+            "kind": "issue",
+            "number": 14,
+            "title": "[P0 BK-03B] Define versioned distribution, font delivery and the approved export subset",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/brand-kit/issues/14",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-11T00:37:12Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Versioned artifact distribution, compatibility, deprecation, rollback, immutable pins and release manifest",
+            "central_issue_keys": [
+              "GH-02-R",
+              "GH-10"
+            ],
+            "affected_artifact_category_ids": [
+              "release_versioning",
+              "architecture_links"
+            ],
+            "body_sha256": "01a045f2d719d473b5206b869b8be1bd5993172cc26b8533917f41a7c7d5e2f8",
+            "source_snapshot": "gh01-evidence/repos/brand-kit/issues.json",
+            "source_ref": "api/brand-kit/repos/Jevelopers-neatHack-2026/brand-kit/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "brand-kit:issue:15",
+            "kind": "issue",
+            "number": 15,
+            "title": "[P1 BK-09] Document and validate version-pinned product and marketing consumption",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/brand-kit/issues/15",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-10T20:25:50Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Consumer adoption matrix, exact pin/hash verification, migration/rollback and acknowledged handoff",
+            "central_issue_keys": [
+              "GH-10",
+              "GH-02-R"
+            ],
+            "affected_artifact_category_ids": [
+              "readme",
+              "release_versioning",
+              "architecture_links",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "e26c6c3e633605e3e145e09e554391550432c42010769686897cce782da01e50",
+            "source_snapshot": "gh01-evidence/repos/brand-kit/issues.json",
+            "source_ref": "api/brand-kit/repos/Jevelopers-neatHack-2026/brand-kit/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "brand-kit:pull_request:3",
+            "kind": "pull_request",
+            "number": 3,
+            "title": "Point edition and foil links at getticketstub.com docs/studio",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/brand-kit/pull/3",
+            "draft": false,
+            "merged_at": null,
+            "updated_at": "2026-10-11T01:05:47Z",
+            "disposition": "open_candidate_unverified",
+            "governance_or_adopter_scope": "Open cross-repository edition/foil link repair with getticketstub.com PR4 dependency, explicitly referenced by BK-09",
+            "central_issue_keys": [
+              "GH-09"
+            ],
+            "affected_artifact_category_ids": [
+              "readme",
+              "architecture_links"
+            ],
+            "body_sha256": "d523221315dbd311b35d6ab8571631ab11817fe29a19f9647e32e668fa7ca4ae",
+            "source_snapshot": "gh01-evidence/repos/brand-kit/pulls.json",
+            "source_ref": "api/brand-kit/repos/Jevelopers-neatHack-2026/brand-kit/pulls?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          }
+        ],
+        "issues_source_ref": "api/brand-kit/repos/Jevelopers-neatHack-2026/brand-kit/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/brand-kit/repos/Jevelopers-neatHack-2026/brand-kit/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -3029,6 +3660,10 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "brand-kit:issue:15",
+            "brand-kit:pull_request:3"
+          ],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -3050,6 +3685,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -3070,6 +3706,9 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "brand-kit:issue:8"
+          ],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -3093,6 +3732,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -3116,6 +3756,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -3137,6 +3778,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -3156,6 +3798,7 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [],
             "workflow_guidance_paths": [],
@@ -3176,6 +3819,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 10,
@@ -3212,8 +3856,15 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "brand-kit:issue:14",
+            "brand-kit:issue:15"
+          ],
           "details": {
             "local_material_paths": [],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -3243,6 +3894,11 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "brand-kit:issue:14",
+            "brand-kit:issue:15",
+            "brand-kit:pull_request:3"
+          ],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -3267,6 +3923,10 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "brand-kit:issue:8",
+            "brand-kit:issue:15"
+          ],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md"
@@ -3351,7 +4011,8 @@
           "title": "[LP-10] Release gate: validate the integrated public landing site and evidence pack",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/landing-page-repo/issues/12",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/landing-page-repo/repos/Jevelopers-neatHack-2026/landing-page-repo/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 1,
@@ -3359,10 +4020,43 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:55:06Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/landing-page-repo/pull/1",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/landing-page-repo/repos/Jevelopers-neatHack-2026/landing-page-repo/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [
+          {
+            "id": "landing-page-repo:issue:11",
+            "kind": "issue",
+            "number": 11,
+            "title": "[LP-09] Establish the landing content review, evidence freshness, and withdrawal workflow",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/landing-page-repo/issues/11",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-10T20:11:09Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Local content review policy, PR/change checklist, named review responsibilities, cadence, withdrawal and deliberate adoption of organization contribution guidance",
+            "central_issue_keys": [
+              "GH-02",
+              "GH-03-P",
+              "GH-08",
+              "GH-10"
+            ],
+            "affected_artifact_category_ids": [
+              "readme",
+              "contributing",
+              "pull_request_templates",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "cdfef8a44ae869f3068869279ea874034bcdba2ac7ef9cdc14ccee1360c50aab",
+            "source_snapshot": "gh01-evidence/repos/landing-page-repo/issues.json",
+            "source_ref": "api/landing-page-repo/repos/Jevelopers-neatHack-2026/landing-page-repo/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          }
+        ],
+        "issues_source_ref": "api/landing-page-repo/repos/Jevelopers-neatHack-2026/landing-page-repo/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/landing-page-repo/repos/Jevelopers-neatHack-2026/landing-page-repo/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -3379,6 +4073,9 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "landing-page-repo:issue:11"
+          ],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -3400,6 +4097,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -3420,6 +4118,9 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "landing-page-repo:issue:11"
+          ],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -3443,6 +4144,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -3466,6 +4168,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -3487,6 +4190,9 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "landing-page-repo:issue:11"
+          ],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -3506,6 +4212,7 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [],
             "workflow_guidance_paths": [],
@@ -3526,6 +4233,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 10,
@@ -3562,8 +4270,12 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_material_paths": [],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -3593,6 +4305,7 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -3617,6 +4330,9 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "landing-page-repo:issue:11"
+          ],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md"
@@ -3699,7 +4415,8 @@
           "title": "[P0 GH-11] Verify the Shared Engineering & Governance v1 release gate",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/.github/issues/16",
-          "classification": "shared-governance release gate; acceptance remains pending"
+          "classification": "shared-governance release gate; acceptance remains pending",
+          "source_ref": "api/.github/repos/Jevelopers-neatHack-2026/.github/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 1,
@@ -3707,10 +4424,37 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:55:15Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/.github/pull/1",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/.github/repos/Jevelopers-neatHack-2026/.github/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [
+          {
+            "id": ".github:pull_request:2",
+            "kind": "pull_request",
+            "number": 2,
+            "title": "docs: publish organization contribution guidance",
+            "state": "closed",
+            "url": "https://github.com/Jevelopers-neatHack-2026/.github/pull/2",
+            "draft": false,
+            "merged_at": "2026-10-10T06:55:58Z",
+            "updated_at": "2026-10-10T06:55:58Z",
+            "disposition": "merged_shared_contribution_guidance_provenance; does not prove local adoption or enforcement",
+            "governance_or_adopter_scope": "Merged shared contribution guidance provenance, distinct from architecture distribution PR1",
+            "central_issue_keys": [
+              "GH-02"
+            ],
+            "affected_artifact_category_ids": [
+              "contributing"
+            ],
+            "body_sha256": "8ad388da52563419f3cb57332941ea66452fed33c9732370216f6d1c02892629",
+            "source_snapshot": "gh01-evidence/repos/.github/pulls.json",
+            "source_ref": "api/.github/repos/Jevelopers-neatHack-2026/.github/pulls?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          }
+        ],
+        "issues_source_ref": "api/.github/repos/Jevelopers-neatHack-2026/.github/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/.github/repos/Jevelopers-neatHack-2026/.github/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -3727,6 +4471,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -3748,6 +4493,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -3768,6 +4514,9 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            ".github:pull_request:2"
+          ],
           "details": {
             "local_file_status": "present",
             "effective_content_status": "outdated",
@@ -3791,6 +4540,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -3814,6 +4564,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -3835,6 +4586,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -3854,6 +4606,7 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [],
             "workflow_guidance_paths": [],
@@ -3874,6 +4627,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 10,
@@ -3910,8 +4664,12 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_material_paths": [],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -3941,6 +4699,7 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -3965,6 +4724,7 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md"
@@ -4047,7 +4807,8 @@
           "title": "[P0 SC-12] Gate shared-contracts v1 release and eight-repository handoff",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/shared-contracts/issues/3",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/shared-contracts/repos/Jevelopers-neatHack-2026/shared-contracts/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 2,
@@ -4055,10 +4816,114 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:54:29Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/shared-contracts/pull/2",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/shared-contracts/repos/Jevelopers-neatHack-2026/shared-contracts/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [
+          {
+            "id": "shared-contracts:issue:6",
+            "kind": "issue",
+            "number": 6,
+            "title": "[P0 SC-03] Define compatibility, versioning, deprecation and immutable consumer pins",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/shared-contracts/issues/6",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-10T19:29:04Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Schema/package version policy, deprecation, producer/consumer change review and immutable consumer pins",
+            "central_issue_keys": [
+              "GH-02",
+              "GH-02-R"
+            ],
+            "affected_artifact_category_ids": [
+              "release_versioning",
+              "architecture_links"
+            ],
+            "body_sha256": "a92eecf9e2d1e93c35f2f5c6fc1ae292645890d6a3ca679b287cd4186b1ebe7d",
+            "source_snapshot": "gh01-evidence/repos/shared-contracts/issues.json",
+            "source_ref": "api/shared-contracts/repos/Jevelopers-neatHack-2026/shared-contracts/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "shared-contracts:issue:30",
+            "kind": "issue",
+            "number": 30,
+            "title": "[P1 SC-10] Publish discoverable catalog, generated-type guidance and consumer migration handoff",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/shared-contracts/issues/30",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-10T19:31:56Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Package/release manifest, registry/tag/version mapping, changelog, release evidence checklist and consumer migration handoff",
+            "central_issue_keys": [
+              "GH-02-R",
+              "GH-09",
+              "GH-10"
+            ],
+            "affected_artifact_category_ids": [
+              "release_versioning",
+              "architecture_links",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "678b08ed4f1497f4d608b902a6219cc3baa62f9e20e2374a3e255c5725695be5",
+            "source_snapshot": "gh01-evidence/repos/shared-contracts/issues.json",
+            "source_ref": "api/shared-contracts/repos/Jevelopers-neatHack-2026/shared-contracts/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "shared-contracts:issue:4",
+            "kind": "issue",
+            "number": 4,
+            "title": "[P0 SC-01] Inventory contracts and record authoritative producer and consumer ownership",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/shared-contracts/issues/4",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-11T00:08:18Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Maintained catalog and authoritative producer/consumer ownership inventory; scope to architecture/contract ownership guidance",
+            "central_issue_keys": [
+              "GH-09"
+            ],
+            "affected_artifact_category_ids": [
+              "architecture_links"
+            ],
+            "body_sha256": "472e3cfbcbccf585663092a2b89876e25b53f0a7d2f29693fee8000b2ea549b6",
+            "source_snapshot": "gh01-evidence/repos/shared-contracts/issues.json",
+            "source_ref": "api/shared-contracts/repos/Jevelopers-neatHack-2026/shared-contracts/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "shared-contracts:pull_request:31",
+            "kind": "pull_request",
+            "number": 31,
+            "title": "feat: implement canonical shared contracts and offline validation",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/shared-contracts/pull/31",
+            "draft": true,
+            "merged_at": null,
+            "updated_at": "2026-10-11T00:28:46Z",
+            "disposition": "open_draft_candidate_unverified",
+            "governance_or_adopter_scope": "Open candidate already implementing compatibility, consumer-pin and catalog work; PR assertions are unverified candidate claims",
+            "central_issue_keys": [
+              "GH-02-R",
+              "GH-09"
+            ],
+            "affected_artifact_category_ids": [
+              "release_versioning",
+              "architecture_links"
+            ],
+            "body_sha256": "409389ac4c1d358637f85d6bacc9629eb2791d803ddb2a78704cd2553b49d497",
+            "source_snapshot": "gh01-evidence/repos/shared-contracts/pulls.json",
+            "source_ref": "api/shared-contracts/repos/Jevelopers-neatHack-2026/shared-contracts/pulls?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          }
+        ],
+        "issues_source_ref": "api/shared-contracts/repos/Jevelopers-neatHack-2026/shared-contracts/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/shared-contracts/repos/Jevelopers-neatHack-2026/shared-contracts/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -4075,6 +4940,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -4096,6 +4962,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -4116,6 +4983,7 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -4139,6 +5007,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -4162,6 +5031,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -4183,6 +5053,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -4202,6 +5073,7 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [],
             "workflow_guidance_paths": [],
@@ -4222,6 +5094,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 16,
@@ -4264,8 +5137,16 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "shared-contracts:issue:6",
+            "shared-contracts:issue:30",
+            "shared-contracts:pull_request:31"
+          ],
           "details": {
             "local_material_paths": [],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -4295,6 +5176,12 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "shared-contracts:issue:6",
+            "shared-contracts:issue:30",
+            "shared-contracts:issue:4",
+            "shared-contracts:pull_request:31"
+          ],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -4319,6 +5206,9 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "shared-contracts:issue:30"
+          ],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md"
@@ -4404,7 +5294,8 @@
           "title": "[P0 EI-12R] Verify the pinned research release and its actual creative handoff",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/event-intelligence/issues/22",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/event-intelligence/repos/Jevelopers-neatHack-2026/event-intelligence/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 2,
@@ -4412,10 +5303,13 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:54:19Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/event-intelligence/pull/2",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/event-intelligence/repos/Jevelopers-neatHack-2026/event-intelligence/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [],
+        "issues_source_ref": "api/event-intelligence/repos/Jevelopers-neatHack-2026/event-intelligence/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/event-intelligence/repos/Jevelopers-neatHack-2026/event-intelligence/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -4432,6 +5326,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -4453,6 +5348,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -4473,6 +5369,7 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -4499,6 +5396,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [
@@ -4526,6 +5424,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -4547,6 +5446,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -4580,6 +5480,7 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [
               ".github/workflows/asset-permissions.yml",
@@ -4615,6 +5516,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 16,
@@ -4658,10 +5560,14 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_material_paths": [
               "release/component-manifest.json"
             ],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -4691,6 +5597,7 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -4716,6 +5623,7 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -4802,7 +5710,8 @@
           "title": "[P0 CE-12] Verify the scoped creative release with pinned integration and live evidence",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/creative-engine/issues/12",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/creative-engine/repos/Jevelopers-neatHack-2026/creative-engine/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 2,
@@ -4810,10 +5719,13 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:54:09Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/creative-engine/pull/2",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/creative-engine/repos/Jevelopers-neatHack-2026/creative-engine/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [],
+        "issues_source_ref": "api/creative-engine/repos/Jevelopers-neatHack-2026/creative-engine/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/creative-engine/repos/Jevelopers-neatHack-2026/creative-engine/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -4830,6 +5742,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -4851,6 +5764,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -4871,6 +5785,7 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -4894,6 +5809,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -4917,6 +5833,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -4938,6 +5855,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -4960,6 +5878,7 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [
               ".github/workflows/api.yml",
@@ -4984,6 +5903,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 17,
@@ -5028,10 +5948,14 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_material_paths": [
               "docs/creative/version-state-machine.md"
             ],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -5061,6 +5985,7 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -5086,6 +6011,7 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -5171,7 +6097,8 @@
           "title": "[P0 PP-12] Gate the production v1 release on deterministic artifacts and evidence",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/print-production/issues/3",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/print-production/repos/Jevelopers-neatHack-2026/print-production/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 2,
@@ -5179,10 +6106,13 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:53:59Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/print-production/pull/2",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/print-production/repos/Jevelopers-neatHack-2026/print-production/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [],
+        "issues_source_ref": "api/print-production/repos/Jevelopers-neatHack-2026/print-production/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/print-production/repos/Jevelopers-neatHack-2026/print-production/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -5199,6 +6129,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -5220,6 +6151,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -5240,6 +6172,7 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -5263,6 +6196,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -5286,6 +6220,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -5307,6 +6242,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -5326,6 +6262,7 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [],
             "workflow_guidance_paths": [],
@@ -5346,6 +6283,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 15,
@@ -5387,8 +6325,12 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_material_paths": [],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -5423,6 +6365,7 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -5447,6 +6390,7 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md"
@@ -5532,7 +6476,8 @@
           "title": "[P0 FC-12] Gate the fulfillment v1 release on mock and sandbox evidence",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/fulfillment-connectors/issues/16",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/fulfillment-connectors/repos/Jevelopers-neatHack-2026/fulfillment-connectors/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 2,
@@ -5540,10 +6485,13 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:53:50Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/fulfillment-connectors/pull/2",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/fulfillment-connectors/repos/Jevelopers-neatHack-2026/fulfillment-connectors/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [],
+        "issues_source_ref": "api/fulfillment-connectors/repos/Jevelopers-neatHack-2026/fulfillment-connectors/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/fulfillment-connectors/repos/Jevelopers-neatHack-2026/fulfillment-connectors/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -5560,6 +6508,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -5581,6 +6530,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -5601,6 +6551,7 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -5625,6 +6576,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [
@@ -5650,6 +6602,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -5671,6 +6624,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -5691,6 +6645,7 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [
               ".github/workflows/ci.yml"
@@ -5713,6 +6668,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 10,
@@ -5749,8 +6705,12 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_material_paths": [],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -5780,6 +6740,7 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -5804,6 +6765,7 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md"
@@ -5888,7 +6850,8 @@
           "title": "[P0 CI-12] Gate Financial Intelligence v1 on implemented semantics and evidence",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/cost-intelligence/issues/5",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/cost-intelligence/repos/Jevelopers-neatHack-2026/cost-intelligence/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 4,
@@ -5896,10 +6859,13 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:53:40Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/cost-intelligence/pull/4",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/cost-intelligence/repos/Jevelopers-neatHack-2026/cost-intelligence/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [],
+        "issues_source_ref": "api/cost-intelligence/repos/Jevelopers-neatHack-2026/cost-intelligence/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/cost-intelligence/repos/Jevelopers-neatHack-2026/cost-intelligence/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -5916,6 +6882,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -5937,6 +6904,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -5957,6 +6925,7 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -5980,6 +6949,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -6003,6 +6973,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -6024,6 +6995,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -6043,6 +7015,7 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "workflow_source_paths": [],
             "workflow_guidance_paths": [],
@@ -6063,6 +7036,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 16,
@@ -6105,8 +7079,12 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_material_paths": [],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -6136,6 +7114,7 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -6160,6 +7139,7 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md"
@@ -6245,7 +7225,8 @@
           "title": "[P0 TD-12] Gate Financial Intelligence v1 on complete dashboard behavior and evidence",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/team-dashboard/issues/4",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/team-dashboard/repos/Jevelopers-neatHack-2026/team-dashboard/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 2,
@@ -6253,10 +7234,40 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:53:32Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/team-dashboard/pull/2",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/team-dashboard/repos/Jevelopers-neatHack-2026/team-dashboard/pulls?state=all&per_page=100"
         },
         "adopter_needs": [],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [
+          {
+            "id": "team-dashboard:pull_request:19",
+            "kind": "pull_request",
+            "number": 19,
+            "title": "Run locked dashboard fixture validation in CI",
+            "state": "closed",
+            "url": "https://github.com/Jevelopers-neatHack-2026/team-dashboard/pull/19",
+            "draft": false,
+            "merged_at": "2026-10-11T01:28:01Z",
+            "updated_at": "2026-10-11T01:28:01Z",
+            "disposition": "merged_partial_local_fixture_CI_slice; actual host and product acceptance remain unverified",
+            "governance_or_adopter_scope": "Merged local fixture CI delivery whose retained docs describe pinning, permissions and evidence gates; no product acceptance inferred",
+            "central_issue_keys": [
+              "GH-06",
+              "GH-08"
+            ],
+            "affected_artifact_category_ids": [
+              "workflows",
+              "release_versioning",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "80273c62fcb5a1f6d0407a01f340561e3ac13d8f11b0d2a6fe16c64b087f6ee8",
+            "source_snapshot": "gh01-evidence/repos/team-dashboard/pulls.json",
+            "source_ref": "api/team-dashboard/repos/Jevelopers-neatHack-2026/team-dashboard/pulls?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          }
+        ],
+        "issues_source_ref": "api/team-dashboard/repos/Jevelopers-neatHack-2026/team-dashboard/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/team-dashboard/repos/Jevelopers-neatHack-2026/team-dashboard/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -6273,6 +7284,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": false,
             "central_implementation_plan_link_present": false,
@@ -6294,6 +7306,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -6314,6 +7327,7 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -6337,6 +7351,7 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -6360,6 +7375,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -6381,6 +7397,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -6390,22 +7407,28 @@
           "category_id": "workflows",
           "status": "present",
           "owner_role": "Finance and reliability",
-          "exact_gap": "1 repository-local workflow source(s) exist. Central reusable-workflow and permission guidance has not yet been adopted here. Actions repository controls were read only for `.github`; this repository’s Actions settings and workflow runs are unknown.",
+          "exact_gap": "1 repository-local workflow source(s) exist (1 separately named guidance file(s)). `docs/integration/TD-11-ci.md` documents local CI triggers, pinned runtime/actions, read-only permissions, report gating, retention, and fixture-versus-host limits; it is guidance and does not prove runs or adoption. Actions repository controls were read only for `.github`; this repository’s Actions settings and workflow runs are unknown.",
           "implementation_issue_keys": [
             "GH-06",
             "GH-10"
           ],
           "source_refs": [
             "tree/team-dashboard/72ad0fc4fada5bd334f5bf24d29835d26647a972",
-            "file/team-dashboard/41216297ee194f964b7fcd61771e82f7288b26c7"
+            "file/team-dashboard/41216297ee194f964b7fcd61771e82f7288b26c7",
+            "file/team-dashboard/bf01806eeebc29e96c5bb6b24e99003470a43c36"
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "team-dashboard:pull_request:19"
+          ],
           "details": {
             "workflow_source_paths": [
               ".github/workflows/dashboard-validation.yml"
             ],
-            "workflow_guidance_paths": [],
+            "workflow_guidance_paths": [
+              "docs/integration/TD-11-ci.md"
+            ],
             "workflow_call_sources": [],
             "actions_settings": "unknown"
           }
@@ -6423,6 +7446,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 15,
@@ -6450,7 +7474,7 @@
           "category_id": "release_versioning",
           "status": "present",
           "owner_role": "Finance and reliability",
-          "exact_gap": "The shared CONTRIBUTING baseline has partial release-handoff language. The central `shared-contracts/docs/contract-catalog.md` defines `schema_version` and compatibility acceptance (reject unsupported major versions, allow additive fields, retain old-consumer compatibility, and review producers and consumers); a versioned copy is also present in the architecture kit. This is contract-version guidance, not package release policy. No reusable package release/version rules or tested-revision manifest schema is established. No repository-specific package release/versioning policy was found on this default branch. GitHub reports 0 release(s) and 0 tag(s); these counts do not establish a policy or acceptance. Existing local release gate team-dashboard#4 is open and remains open.",
+          "exact_gap": "The shared CONTRIBUTING baseline has partial release-handoff language. The central `shared-contracts/docs/contract-catalog.md` defines `schema_version` and compatibility acceptance (reject unsupported major versions, allow additive fields, retain old-consumer compatibility, and review producers and consumers); a versioned copy is also present in the architecture kit. This is contract-version guidance, not package release policy. No reusable package release/version rules or tested-revision manifest schema is established. `docs/integration/mount-contract.md` gives partial host-specific package adoption and rollback instructions: adopt a reviewed package archive/revision with exact React peers, retain the prior host package pin, restore that pin and stylesheet or remove the mount to roll back, and record the archive digest, host commit, contract/producer pins and host reviewer acknowledgement. This does not establish a reusable package release policy or prove host adoption. GitHub reports 0 release(s) and 0 tag(s); these counts do not establish a policy or acceptance. Existing local release gate team-dashboard#4 is open and remains open.",
           "implementation_issue_keys": [
             "GH-02-R",
             "GH-08"
@@ -6459,13 +7483,24 @@
             "file/.github/1c9f20bab56538fed0535b18422311c82abdb16d",
             "file/shared-contracts/e210b82d23f58ea218ecd79f10339bd8e7205722",
             "file/getticketstub.com/f9ff262959f5b04c72a07b70b336dd1c4aefa08a",
+            "file/team-dashboard/9c329dbcf3a835b2892769ee9c78cf19b753ea8a",
             "api/team-dashboard/repos/Jevelopers-neatHack-2026/team-dashboard/releases?per_page=100",
             "api/team-dashboard/repos/Jevelopers-neatHack-2026/team-dashboard/tags?per_page=100"
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "team-dashboard:pull_request:19"
+          ],
           "details": {
-            "local_material_paths": [],
+            "local_material_paths": [
+              "docs/integration/mount-contract.md"
+            ],
+            "partial_package_adoption_guidance_paths": [
+              "docs/integration/mount-contract.md"
+            ],
+            "local_package_adoption_guidance_status": "partial",
+            "partial_package_adoption_summary": "Reviewed archive/revision and exact React peers; preserve prior host pin; rollback restores prior pin plus stylesheet or removes mount; record archive digest, host commit, contract/producer pins, and host reviewer acknowledgement. Host acceptance remains unverified.",
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -6495,6 +7530,7 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -6519,6 +7555,9 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "team-dashboard:pull_request:19"
+          ],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md"
@@ -6603,7 +7642,8 @@
           "title": "[IE-12][P0] Gate the integration-evals v1 release with exact coverage and evidence criteria",
           "state": "open",
           "url": "https://github.com/Jevelopers-neatHack-2026/integration-evals/issues/22",
-          "classification": "domain/product release gate; not shared-governance adoption verification"
+          "classification": "domain/product release gate; not shared-governance adoption verification",
+          "source_ref": "api/integration-evals/repos/Jevelopers-neatHack-2026/integration-evals/issues?state=all&per_page=100"
         },
         "architecture_distribution_pr": {
           "number": 2,
@@ -6611,7 +7651,8 @@
           "state": "closed",
           "merged_at": "2026-10-10T06:53:23Z",
           "url": "https://github.com/Jevelopers-neatHack-2026/integration-evals/pull/2",
-          "classification": "documentation distribution; does not establish product acceptance"
+          "classification": "documentation distribution; does not establish product acceptance",
+          "source_ref": "api/integration-evals/repos/Jevelopers-neatHack-2026/integration-evals/pulls?state=all&per_page=100"
         },
         "adopter_needs": [
           {
@@ -6619,10 +7660,113 @@
             "title": "[IE-10][P0] Orchestrate CI using immutable dependency pins and provider modes",
             "state": "open",
             "url": "https://github.com/Jevelopers-neatHack-2026/integration-evals/issues/9",
-            "classification": "existing adopter implementation need; not a governance adoption confirmation"
+            "classification": "existing adopter implementation need; not a governance adoption confirmation",
+            "source_ref": "api/integration-evals/repos/Jevelopers-neatHack-2026/integration-evals/issues?state=all&per_page=100"
           }
         ],
-        "no_repo_specific_governance_adoption_issue_observed": true
+        "scoped_governance_adopter_work": [
+          {
+            "id": "integration-evals:issue:8",
+            "kind": "issue",
+            "number": 8,
+            "title": "[IE-09A][P0] Export machine-readable results and honest requirement coverage",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/integration-evals/issues/8",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-10T19:23:06Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Run/result schema, honest acceptance states, evidence-update procedure and authoritative tracker consistency",
+            "central_issue_keys": [
+              "GH-08"
+            ],
+            "affected_artifact_category_ids": [
+              "acceptance_evidence"
+            ],
+            "body_sha256": "fa6d4dacba4795b8e4aace429fde9d2a7fcac9469682ba70c97077eb4fb28ca2",
+            "source_snapshot": "gh01-evidence/repos/integration-evals/issues.json",
+            "source_ref": "api/integration-evals/repos/Jevelopers-neatHack-2026/integration-evals/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "integration-evals:issue:20",
+            "kind": "issue",
+            "number": 20,
+            "title": "[IE-08][P0] Package sanitized sponsor and acceptance evidence references",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/integration-evals/issues/20",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-11T00:42:15Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Sanitized evidence index, immutable proof refs, evidence classification and reviewer accessibility",
+            "central_issue_keys": [
+              "GH-07",
+              "GH-08"
+            ],
+            "affected_artifact_category_ids": [
+              "security_reporting",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "7fb31e180af6c545f467896b9ec01bc916e8679c2bfbdf12a94becd20a46f69b",
+            "source_snapshot": "gh01-evidence/repos/integration-evals/issues.json",
+            "source_ref": "api/integration-evals/repos/Jevelopers-neatHack-2026/integration-evals/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "integration-evals:issue:21",
+            "kind": "issue",
+            "number": 21,
+            "title": "[IE-09B][P0] Preserve failures and define flake tracking and safe reruns",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/integration-evals/issues/21",
+            "draft": null,
+            "merged_at": null,
+            "updated_at": "2026-10-10T19:26:54Z",
+            "disposition": "open_existing_owner_issue; backlog ownership is not completion or adoption",
+            "governance_or_adopter_scope": "Failure retention, flake ownership/expiry, rerun/CI triage runbook and release-blocking semantics",
+            "central_issue_keys": [
+              "GH-06",
+              "GH-08"
+            ],
+            "affected_artifact_category_ids": [
+              "workflows",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "d84a89e08278a10345386a061dc2b6d2b133cb035601a3b35b2fe13ffb9b1d87",
+            "source_snapshot": "gh01-evidence/repos/integration-evals/issues.json",
+            "source_ref": "api/integration-evals/repos/Jevelopers-neatHack-2026/integration-evals/issues?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          },
+          {
+            "id": "integration-evals:pull_request:23",
+            "kind": "pull_request",
+            "number": 23,
+            "title": "feat: add pinned integration verification tooling",
+            "state": "open",
+            "url": "https://github.com/Jevelopers-neatHack-2026/integration-evals/pull/23",
+            "draft": true,
+            "merged_at": null,
+            "updated_at": "2026-10-11T01:15:02Z",
+            "disposition": "open_draft_candidate_unverified",
+            "governance_or_adopter_scope": "Open partial pinned verification/evidence tooling and CI; preserve its explicit incomplete/provider/scope limitations",
+            "central_issue_keys": [
+              "GH-06",
+              "GH-08"
+            ],
+            "affected_artifact_category_ids": [
+              "workflows",
+              "release_versioning",
+              "acceptance_evidence"
+            ],
+            "body_sha256": "657c8b34e114ae9208d24529f65a673a9e1eb0c986fc6421a250da86c4fca7c8",
+            "source_snapshot": "gh01-evidence/repos/integration-evals/pulls.json",
+            "source_ref": "api/integration-evals/repos/Jevelopers-neatHack-2026/integration-evals/pulls?state=all&per_page=100",
+            "source_snapshot_observed_at": "2026-10-11T01:33:25Z"
+          }
+        ],
+        "issues_source_ref": "api/integration-evals/repos/Jevelopers-neatHack-2026/integration-evals/issues?state=all&per_page=100",
+        "pull_requests_source_ref": "api/integration-evals/repos/Jevelopers-neatHack-2026/integration-evals/pulls?state=all&per_page=100"
       },
       "artifacts": [
         {
@@ -6639,6 +7783,7 @@
           ],
           "verification_ref": "readme",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "central_architecture_link_present": true,
             "central_implementation_plan_link_present": true,
@@ -6660,6 +7805,7 @@
           ],
           "verification_ref": "agents_md",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "observed_paths": [],
             "scope": "observed default branch only; other branches not inspected"
@@ -6680,6 +7826,7 @@
           ],
           "verification_ref": "contributing",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_file_status": "missing",
             "effective_content_status": "outdated",
@@ -6703,6 +7850,9 @@
           ],
           "verification_ref": "security_reporting",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "integration-evals:issue:20"
+          ],
           "details": {
             "observed_security_policy_paths": [],
             "related_domain_security_notes": [],
@@ -6726,6 +7876,7 @@
           ],
           "verification_ref": "issue_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -6747,6 +7898,7 @@
           ],
           "verification_ref": "pull_request_templates",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "local_paths": [],
             "effective_template": null
@@ -6766,6 +7918,10 @@
           ],
           "verification_ref": "workflows",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "integration-evals:issue:21",
+            "integration-evals:pull_request:23"
+          ],
           "details": {
             "workflow_source_paths": [],
             "workflow_guidance_paths": [],
@@ -6786,6 +7942,7 @@
           ],
           "verification_ref": "labels",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "configuration_status": "observed_via_API",
             "count": 10,
@@ -6822,8 +7979,14 @@
           ],
           "verification_ref": "release_versioning",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "integration-evals:pull_request:23"
+          ],
           "details": {
             "local_material_paths": [],
+            "partial_package_adoption_guidance_paths": [],
+            "local_package_adoption_guidance_status": "not_found",
+            "partial_package_adoption_summary": null,
             "shared_contract_compatibility_guidance": "The central catalog supplies schema-version and producer/consumer compatibility guidance only; it is not package release/versioning policy.",
             "dedicated_local_policy_status": "missing",
             "github_releases_count": 0,
@@ -6853,6 +8016,7 @@
           ],
           "verification_ref": "architecture_links",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [],
           "details": {
             "architecture_paths": [
               "docs/architecture/ACCEPTANCE.md",
@@ -6879,6 +8043,12 @@
           ],
           "verification_ref": "acceptance_evidence",
           "observed_at": "2026-10-11T01:33:25Z",
+          "existing_work_refs": [
+            "integration-evals:issue:8",
+            "integration-evals:issue:20",
+            "integration-evals:issue:21",
+            "integration-evals:pull_request:23"
+          ],
           "details": {
             "local_acceptance_paths": [
               "docs/architecture/ACCEPTANCE.md",
