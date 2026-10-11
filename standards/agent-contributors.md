@@ -14,6 +14,27 @@ Distinguish three roles:
 
 Shared .github guidance is owned here. Domain behavior is implemented by the domain owner. Canonical schemas are owned by shared-contracts. Master acceptance/evidence is owned by integration-evals. If ownership conflicts, stop at the boundary and provide the exact source links/revisions and proposed handoff; do not make a competing implementation.
 
+## Local AGENTS.md adoption snippet
+
+Adapt this snippet to the destination's actual paths and owner role. The destination maintainers deliberately install and review it; it is not automatically inherited. Before copying, review the current canonical [agent-contributor guidance](https://github.com/Jevelopers-neatHack-2026/.github/blob/main/standards/agent-contributors.md) and [security and secret-handling guidance](https://github.com/Jevelopers-neatHack-2026/.github/blob/main/standards/security-secret-handling.md). In the destination adoption record, pin the full reviewed `.github` source SHA and note any local changes.
+
+```markdown
+# Agent instructions for <destination repository>
+
+Owner role: <destination maintainer role>
+
+The maintainers of this repository deliberately installed and reviewed this file.
+Read the local `README.md`, `docs/architecture/OWNERSHIP.md`,
+`docs/architecture/ACCEPTANCE.md`, and `CONTRIBUTING.md`,
+then follow the shared [agent-contributor guidance](https://github.com/Jevelopers-neatHack-2026/.github/blob/main/standards/agent-contributors.md)
+and [security guidance](https://github.com/Jevelopers-neatHack-2026/.github/blob/main/standards/security-secret-handling.md).
+Follow more-specific local instructions and the user's explicit scope.
+
+This file does not configure GitHub review rules, repository settings, or workflows.
+```
+
+Replace or remove local links that do not exist before committing this snippet. The destination owner reviews and maintains the resulting file; installation here does not enforce adoption or enable GitHub controls.
+
 ## Role and model routing
 
 For policy pack 1.1.0, general non-UI work uses OpenAI gpt-6-luna with max reasoning and Fast priority, or Claude Haiku 5.5 under its supported native defaults. UI work uses GPT-6.1 Sol High or Claude Sonnet 5.5. Independent review uses Astra High or Claude Opus 5.5. These are authorized role pairs for that pack, not a claim that providers/settings are equivalent.

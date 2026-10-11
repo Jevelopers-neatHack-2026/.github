@@ -18,7 +18,7 @@ This example describes a hypothetical repository that has not been created. It i
 | CONTRIBUTING | proposed | Adapt source guidance after local branch/test conventions are known. |
 | SECURITY route | blocked | No destination or confirmed private contact/owner exists. |
 | AGENTS | proposed | Install and review a local file after ownership is known. |
-| Five safe issue forms | proposed | Confirm applicability and actual destination labels; current forms omit auto-labels. |
+| Five active issue forms | proposed | Review the forms' configured labels and verify every label and permission in this destination before adoption. The separate security draft stays outside the chooser while its private route is unresolved. |
 | Security form | blocked | Do not install the pending draft until route confirmation and preview. |
 | PR template | proposed | Copy to the destination default branch and review local requirements. |
 | Labels | unknown | No destination label inventory or permissions. |
@@ -27,3 +27,5 @@ This example describes a hypothetical repository that has not been created. It i
 | Source links/gates | proposed | Link owner sources, not a separate local master tracker. |
 
 All settings are unknown because there is no destination. No owner, license, CODEOWNERS entry, label, check, or branch rule is invented. This record cannot be closed until a destination exists and its owner reviews actual evidence.
+
+The five published active forms request these existing labels: feature (`type:implementation`, `enhancement`), bug (`type:bug`, `bug`), integration (`type:implementation`, `cross-repo`), research/decision (`type:docs`, `question`), and backlog audit (`type:chore`). A read-only inventory at 2026-10-11 02:44:41 UTC found all eight configured labels in each of fourteen organization repositories. That point-in-time existence snapshot does not show form adoption, guarantee a new destination has the labels, or establish organization-wide compliance. Before adopting, inspect the destination's local overrides and verify every configured label and permission there; follow the [issue-form guidance](../issue-forms.md) and [label procedure](../../standards/labels-planning.md). The security form remains a pending draft outside the chooser until the private route is confirmed.
