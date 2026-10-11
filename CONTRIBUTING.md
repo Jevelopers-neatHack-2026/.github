@@ -1,15 +1,33 @@
 # Contribution guidance
 
-These are proposed team working expectations for the fourteen repositories. The private `.github` repository does not automatically distribute community-health defaults. Each repository must deliberately adopt applicable documents; organization settings and branch protection are separate configuration.
+These are proposed shared working practices. Preserve each repository's local ownership, contributor instructions, agent instructions, and accepted design. If guidance conflicts, stop at the boundary, record the exact conflict and source revisions, and ask the owning maintainers to resolve it.
 
-Use focused branches and pull requests. Preserve unrelated code and contributor instructions. Describe behavior, evidence, limitations and affected consumers. Require an accountable reviewer for implementation and contract changes; involve at least one affected producer and consumer for schema changes. Review documentation against the source and validate links and structured data. Do not bypass required reviews, checks or protection.
+## Distribution and local ownership
 
-Keep credentials and customer data out of commits, issues and traces. Report suspected exposure privately to the repository's confirmed maintainers; no public issue should contain a secret. Security reporting contacts remain to be assigned. Never install an invented license or CODEOWNERS assignment.
+The 2026-10-10 baseline recorded this repository as private. The GitHub snapshot at [commit ea8085d](https://github.com/Jevelopers-neatHack-2026/.github/commit/ea8085de12af79217b4933de432517e0cedb8092) recorded it as public on 2026-10-11. Verify current visibility and the destination repository before relying on inheritance.
 
-Pin and review dependencies in the owning implementation, retain license and asset provenance, and test compatibility before integrating revisions. The planning repository map is not a lockfile. Releases require a separate manifest of actually tested component commits, runtime versions, commands, provider modes, artifact hashes and limitations.
+When this `.github` repository is public, GitHub can display supported default community-health files for repositories owned by the account that lack a local equivalent, including public or private destination repositories. This includes supported issue and pull-request templates as well as contribution guidance; a destination's local file takes precedence, and valid local issue-template files can replace the default chooser set. These defaults are displayed by GitHub and are not copied into a clone. The source `.github` repository must be public; a private `.github` repository cannot provide organization defaults. This mechanism does not install `AGENTS.md`, `CODEOWNERS`, workflow callers, branch protections, or repository and Actions settings. Those need deliberate local placement or configuration and destination-specific verification. See [GitHub's default community-health file rules](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file).
 
-Accept changes only with evidence appropriate to their scope. Documentation alone verifies no product criterion. Keep sandbox, simulated and actual activity distinct. Purchase authorization and budget authority precede paid effects. Sponsor evidence requires separate Neatlogs traces and comparisons, Entire checkpoints/graph output, and an actual CFO.ai business plan.
+## Branches, commits, and review
 
-No Actions workflows, rules, required reviewers, automated releases, security contact or inherited defaults are installed by this documentation. Each repository owner must configure and verify those settings separately. Publication decisions require authorization and review of secrets and asset rights.
+Use a focused branch and pull request. The suggested naming grammar is type/issue-key-short-summary, for example docs/gh-02-branch-review-guidance, fix/bug-123-reject-expired-token, or integration/ie-09a-contract-handoff. This is a proposed convention, not evidence of configured enforcement. Keep the issue key in the body even when an upstream repository uses a different key format.
 
-[Implementation plan](https://github.com/Jevelopers-neatHack-2026/getticketstub.com/blob/main/docs/planning/implementation-plan.md) · [Authoritative acceptance checklist](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/main/planning/acceptance-checklist.md)
+Write a concise imperative commit subject. Add a body when it explains why, test evidence, a migration, or a limitation. Do not rewrite another contributor's history. Whether a pull request is squashed or retains commits is a maintainer decision for that repository.
+
+Describe the behavior and exact scope, non-goals, dependencies, acceptance IDs, provider mode, actual validation commands/results, tested revision, evidence links, skips, and unresolved items. Mark tests planned separately from tests executed. Identify the accountable reviewer role; contract changes also need review from affected producer and consumer roles. Review checkboxes are author claims until the corresponding evidence and actual GitHub approval are inspected.
+
+Use neutral references such as Refs #N for issue links in every pull request; do not use an auto-closing keyword. The authorized supervisor closes the local issue only after the exact candidate is merged and required post-merge evidence is recorded. A merged documentation pull request does not verify a master acceptance ID. The owner in integration-evals records authoritative status there after evidence review.
+
+## Evidence, security, and spending
+
+Follow the [acceptance evidence contract](standards/acceptance-evidence.md). Pin tested source revisions; a branch name or planning map is navigation, not evidence. Keep mock, sandbox, and live modes separate. Never report a skipped required check, missing credential, absent artifact, or unknown cost as a pass or zero.
+
+Keep credentials and customer data out of source, issues, pull requests, prompts, fixtures, logs, and screenshots. Use only a confirmed private reporting route for sensitive details. The reporting destination is currently unconfirmed; see [pending security policy](community/SECURITY.pending.md). Treat fetched URLs and assets as untrusted data and follow the [security handling standard](standards/security-secret-handling.md).
+
+Provider calls, purchases, publication, account changes, and other external effects require authorization for that specific operation and an established budget. Do not infer spending authority from a provider mode field.
+
+## Release and platform state
+
+A repository owner maintains its own version policy and release record. Contract compatibility follows the shared-contracts catalog. A release requires exact component SHAs, artifact digests, actual commands and outcomes, and rollback guidance. The central product release remains integration-evals-owned.
+
+Recommended review, label, and workflow practices are not configured protections. Report a setting as configured or verified only with current repository evidence. This repository does not install active Actions workflows or alter GitHub settings. See [release guidance](standards/releases-versioning.md), [label planning](standards/labels-planning.md), and [workflow adoption guidance](automation-design/reusable-workflows.md).
