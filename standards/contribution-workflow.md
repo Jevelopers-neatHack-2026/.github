@@ -14,12 +14,14 @@ Suggested grammar:
 
     <type>/<issue-key>-<short-summary>
 
-Examples:
+Fictional branch and commit examples (no corresponding issue, PR, merge, or test run is claimed):
 
-- Feature: feat/gh-21-export-favorites
-- Bug: fix/gh-22-reject-expired-quote
-- Documentation: docs/gh-02-branch-review-guidance
-- Cross-repository integration: integration/ie-09a-contract-handoff
+| Contribution | Branch | Commit subject |
+|---|---|---|
+| Feature | feat/example-export-favorites | feat: export saved favorites (example) |
+| Bug | fix/example-reject-expired-quote | fix(orders): reject expired quote (example) |
+| Documentation | docs/gh-02-branch-review-guidance | docs: clarify branch-to-review evidence (GH-02 example) |
+| Cross-repository integration | integration/example-contract-handoff | integration: add contract handoff fixture (example) |
 
 Use a repository's established naming policy if one exists. Lowercase branch names make examples easy to type. Preserve the canonical issue key in the pull-request body. A branch name is a convention, not evidence that the repository enforces it.
 
@@ -52,7 +54,7 @@ The shared pull-request template is at .github/pull_request_template.md. Copy it
 
 Before requesting review, inspect the diff, check for secrets and unrelated files, and run the relevant local checks. A draft PR may be useful while a dependency is unresolved; it is not ready evidence.
 
-Use Closes only if this PR completes every accepted requirement of that issue. Use Related to for a partial issue, prerequisite, or blocked handoff. Do not close a master acceptance item from this repository.
+Use a neutral reference such as Refs #N for issue links in every PR. Do not use an auto-closing keyword. The authorized supervisor closes the local issue only after the exact candidate is merged and the required post-merge evidence is recorded. A merged documentation PR does not verify a master acceptance item; integration-evals updates its status after evidence review.
 
 ## 5. Review, merge, and verify
 
@@ -69,3 +71,18 @@ These are documentation examples, not submitted pull requests or execution evide
 - Documentation-only: GH-02 (#7), branch docs/gh-02-branch-review-guidance. A PR can report a Markdown/link command and a source SHA only after those commands run. Its merge makes the guidance available on the destination default branch; it does not change a master acceptance ID.
 - Bug: a synthetic issue would link a sanitized reproduction and expected/actual behavior. The branch and test remain hypothetical until a destination issue and exact test run exist.
 - Contract handoff: actual coordination sources include [shared-contracts issue #3](https://github.com/Jevelopers-neatHack-2026/shared-contracts/issues/3) and [integration-evals issue #8](https://github.com/Jevelopers-neatHack-2026/integration-evals/issues/8). Link the producer revision, contract/version, executed producer check, fixture, and consumer acknowledgment. A source link alone is not an integration pass.
+
+### One complete documentation-change path
+
+This fictional walkthrough starts at the real [GH-02 issue #7](https://github.com/Jevelopers-neatHack-2026/.github/issues/7). It shows the handoff from issue through review without claiming a repository event:
+
+| Stage | Record for this walkthrough |
+|---|---|
+| Issue and acceptance scope | Local governance key GH-02, issue #7. No product acceptance ID is claimed as verified; use N/A for master IDs because this is a documentation procedure example. |
+| Branch | docs/gh-02-branch-review-guidance (illustrative branch name; no branch event is claimed) |
+| Commit | docs: clarify branch-to-review evidence (GH-02 example); full SHA UNKNOWN because no commit event is claimed |
+| PR | Would link the real issue with neutral text `Refs #7`, list scope/non-goals, dependencies, actual acceptance IDs or justified N/A, and producer/consumer roles where relevant. PR URL UNKNOWN; no PR is claimed. |
+| Test plan and result | Planned: run the destination's documented Markdown/link check on the final candidate. Actual command, tested SHA, and outcome: N/A/UNKNOWN because no run is claimed. |
+| Evidence and review | No artifact or reviewer record exists in this example. The independent reviewer would inspect exact base/head/candidate revisions and record a real review; status remains pending until that happens. |
+
+After an actual merge, the authorized supervisor verifies the merge commit and relevant post-merge behavior before closing the local issue. A later relevant commit requires fresh review and affected checks. This table is a process walkthrough, not evidence of a PR, test, approval, merge, or master acceptance change.

@@ -34,7 +34,7 @@ The reviewer must be fresh and independent of implementation. Review the complet
 
 After a new commit, rebase, conflict resolution, base change, or candidate merge change that affects the reviewed result, get a fresh review of the current exact candidate and rerun affected checks. Do not shop for a reviewer to discard a blocking finding.
 
-Only the authorized repository maintainer merges under actual protections and required checks. Preserve an absent/unavailable rule as unknown; never bypass configured protection. After an authorized merge, verify the merge commit and relevant post-merge behavior. Close an issue only when every accepted requirement has its required evidence. The authoritative owner in integration-evals updates master acceptance after review.
+Only the authorized repository maintainer merges under actual protections and required checks. Preserve an absent/unavailable rule as unknown; never bypass configured protection. Use neutral issue references in pull requests and avoid auto-closing keywords. After an authorized merge, verify the exact merge commit and relevant post-merge behavior; the authorized supervisor closes a local issue only after that evidence is recorded. The authoritative owner in integration-evals updates master acceptance after its evidence review.
 
 ## Scenarios
 

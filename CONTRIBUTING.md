@@ -16,7 +16,7 @@ Write a concise imperative commit subject. Add a body when it explains why, test
 
 Describe the behavior and exact scope, non-goals, dependencies, acceptance IDs, provider mode, actual validation commands/results, tested revision, evidence links, skips, and unresolved items. Mark tests planned separately from tests executed. Identify the accountable reviewer role; contract changes also need review from affected producer and consumer roles. Review checkboxes are author claims until the corresponding evidence and actual GitHub approval are inspected.
 
-Use Closes only when the pull request completes the linked issue's entire accepted scope. Use Related to when work is partial, blocked, or provides a prerequisite. A merged documentation pull request does not verify a master acceptance ID. The owner in integration-evals records authoritative status there.
+Use neutral references such as Refs #N for issue links in every pull request; do not use an auto-closing keyword. The authorized supervisor closes the local issue only after the exact candidate is merged and required post-merge evidence is recorded. A merged documentation pull request does not verify a master acceptance ID. The owner in integration-evals records authoritative status there after evidence review.
 
 ## Evidence, security, and spending
 
