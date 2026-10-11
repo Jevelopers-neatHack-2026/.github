@@ -6,6 +6,11 @@ documented convention; none configures reviews, branch protection or required ch
 | Interface | Contract version | Source | Issue |
 | --- | --- | --- | --- |
 | Pull request description | `GH-PR-TEMPLATE@1.0.0` | [`.github/pull_request_template.md`](../.github/pull_request_template.md) | [GH-03-P](https://github.com/Jevelopers-neatHack-2026/.github/issues/14) |
+| Issue forms (five active; security draft outside the chooser) | `GH-ISSUE-FORMS@1.0.0` | [`.github/ISSUE_TEMPLATE/`](../.github/ISSUE_TEMPLATE/) · [guidance](issue-forms.md) | [GH-03-I](https://github.com/Jevelopers-neatHack-2026/.github/issues/13) |
+
+The rest of this page covers the pull request template. Issue-form fields, labels and the pending
+security route are documented in [issue forms](issue-forms.md); the evidence, release, backlog-audit
+and adoption records in this directory are linked from the [repository README](../README.md#docs).
 
 ## How the pull request template reaches a repository
 
