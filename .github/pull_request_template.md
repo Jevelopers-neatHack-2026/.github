@@ -3,12 +3,13 @@ Jevelopers neatHack 2026 program pull request template (GH-03-P).
 Template interface: GH-PR-TEMPLATE@1.0.0. This names the section/field contract; it does not
 assert that this source revision is merged, that any repository adopted it, or that review
 enforcement is configured.
-Guidance: https://github.com/Jevelopers-neatHack-2026/.github/blob/main/templates/README.md
 Replace every <placeholder>. Write "None" or "N/A — <reason>" instead of deleting a section.
 Checkboxes are author claims for the reviewer to check. They do not prove that reviews,
 branch protection, required checks or provider calls are configured or happened.
 Never paste secrets, tokens, signed URLs, customer data or exploit details here.
 -->
+
+[How to fill in this template](https://github.com/Jevelopers-neatHack-2026/.github/blob/main/templates/README.md#filling-in-the-template)
 
 ## Summary
 [2–4 sentences: what changed and why]
