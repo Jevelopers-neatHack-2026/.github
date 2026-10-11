@@ -16,7 +16,7 @@ If a required label is unavailable, keep the equivalent value in issue-body meta
 
 ## Existing .github label mapping
 
-The captured target set had ten existing labels. Preserve their current meanings; do not rename or delete them as part of this proposal.
+The captured baseline target set had ten existing labels. Preserve their current meanings; do not rename or delete them as part of this proposal. A later read-only label inventory at 2026-10-11 02:44:41 UTC found all eight labels configured by the current issue-form candidate in each of the fourteen organization repositories. That dated existence check does not show that these forms are installed or that this guidance created labels; recheck each destination before adoption.
 
 | Existing label | Relationship to proposal |
 |---|---|
@@ -31,7 +31,18 @@ The captured target set had ten existing labels. Preserve their current meanings
 | question | Discussion/request-for-information label; preserve. |
 | wontfix | Disposition label; preserve. |
 
-Do not create a second label merely to make templates look consistent. The five active issue forms intentionally omit automatic labels; their bodies remain useful without permission or a label rollout.
+Do not create a second label merely to make templates look consistent. The five non-security issue forms in the reviewed candidate use these existing labels:
+
+| Form | Configured labels |
+|---|---|
+| Feature | `type:implementation`, `enhancement` |
+| Bug | `type:bug`, `bug` |
+| Integration | `type:implementation`, `cross-repo` |
+| Research / decision | `type:docs`, `question` |
+| Backlog audit | `type:chore` |
+| Security draft | `type:bug` (outside the active chooser; private route remains unconfirmed) |
+
+The candidate source was reviewed at commit `6956871b5eebb9a9a4269f68e75c5089747f8189` after its merge of current main `e73eacf85299d6d524d176b5c663f44cb7147f04`; the security form remains a pending draft, not an active route. The live inventory receipt records all eight names present in all fourteen repositories at the timestamp above. This is a point-in-time existence check, not adoption or proof that every destination continues to have the labels. Recheck the destination's labels and permissions before relying on a form. Do not infer a label rollout or add priority, area, dependency-state, or required-for-v1 labels through these forms.
 
 Examples, with names still proposed:
 
