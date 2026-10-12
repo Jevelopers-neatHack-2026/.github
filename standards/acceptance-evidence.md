@@ -1,6 +1,8 @@
 # Acceptance and evidence
 
-This standard records evidence for a scoped issue while preserving central acceptance ownership. The authoritative IDs and status are in [integration-evals' master checklist](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/ff1f6d2df816ebbff34742f51be728fcb5c28cb5/planning/acceptance-checklist.md) and its [JSON tracker](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/ff1f6d2df816ebbff34742f51be728fcb5c28cb5/planning/acceptance-checklist.json). The inspected tracker has planned criteria and empty evidence/tested-revision fields. It remains the source of truth; this repository does not duplicate or update it.
+This standard records evidence for a scoped issue while preserving central acceptance ownership. The authoritative IDs and current status live in integration-evals' [master checklist](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/main/planning/acceptance-checklist.md) and [JSON tracker](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/main/planning/acceptance-checklist.json). This repository does not duplicate or update them.
+
+The initial baseline inspection used the immutable [historical checklist](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/ff1f6d2df816ebbff34742f51be728fcb5c28cb5/planning/acceptance-checklist.md) and [historical JSON tracker](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/ff1f6d2df816ebbff34742f51be728fcb5c28cb5/planning/acceptance-checklist.json). At that snapshot all criteria were planned and evidence/tested-revision references were empty; that is historical context, not today's status. The IE-09A consumer comparison reviewed the [checklist](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/f4ac1b3ce9da335e2ec9f2a1ff21861439d33e46/planning/acceptance-checklist.md) and [tracker](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/f4ac1b3ce9da335e2ec9f2a1ff21861439d33e46/planning/acceptance-checklist.json) at `f4ac1b3ce9da335e2ec9f2a1ff21861439d33e46` on 2026-10-12 UTC. A separate read-only check on 2026-10-12 UTC found integration-evals `main` at `a8174f642449a6bf7f42f9f8790a6485842afd5a`; its [checklist](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/a8174f642449a6bf7f42f9f8790a6485842afd5a/planning/acceptance-checklist.md) and [JSON tracker](https://github.com/Jevelopers-neatHack-2026/integration-evals/blob/a8174f642449a6bf7f42f9f8790a6485842afd5a/planning/acceptance-checklist.json) contained 47 criteria: 44 planned and three verified (SPN-01, SPN-02, SPN-03). This dated observation can go stale; read the authoritative tracker at its current revision before making a status decision. The historical baseline, consumer comparison, and later discovery are distinct records, not interchangeable status snapshots.
 
 ## Evidence record
 
@@ -9,21 +11,27 @@ For each verified claim, record:
 - acceptance ID(s), or N/A with a reason; owning repository and issue URL;
 - exact tested full commit SHA, or the digest and exact revision of an assembled manifest;
 - runtime, configuration, environment, and input/fixture identity or digest;
+- evidence origin/provenance for each artifact, including whether it is independently synthetic, recorded from an earlier source, sandbox-derived, or obtained live; describe the source rather than inferring it from the execution mode;
+- for a recorded artifact, its source/run or artifact reference, original source origin and mode, exact source revision when available, capture date/time and timezone, captured-by role when known, artifact identity/digest, and access/redaction status;
+- for a replay, the recorded source artifact and digest, transformations/redactions applied, replay procedure and exact checker revision, replay date/time and timezone, and the execution mode of that replay;
 - command or procedure, expected result, actual result, execution date, and reviewer role;
 - evidence URLs and content hashes where available, with access class and redaction status;
-- status, execution outcome, provider mode for each component, limitations, blocker owner role, and budget/cost/usage state including unknown values.
+- status, execution outcome, execution/provider mode for each component, limitations, blocker owner role, and budget/cost/usage state including unknown values.
 
 Never invent a URL, SHA, date, reviewer, digest, cost, or owner. Restrict evidence references to authorized readers; store sanitized summaries in the central evidence index. Do not put credentials, customer data, exploit details, signed URLs, or raw payment material in ordinary reports.
 
-## Keep state, result, and provider mode separate
+## Keep state, provenance, result, and execution mode separate
 
 | Dimension | Values | Meaning |
 |---|---|---|
 | Criterion state | planned, in_progress, blocked, verified, deferred | Project decision about the requirement |
 | Execution outcome | pass, fail, skipped, error, N/A with rationale | Result of one actual command or procedure |
-| Provider mode | mock, sandbox, live, N/A with rationale | Mode for a specific component or procedure |
+| Evidence origin/provenance | Describe each artifact as independently synthetic, recorded, sandbox-derived, live, or unknown with a reason | How the evidence artifact was created or obtained; a recorded artifact must retain the context of its original source and capture |
+| Execution/provider mode | mock, sandbox, live, N/A with rationale | How the current command or procedure ran for each component; an offline replay of a recorded live-origin artifact is mock/offline execution, not a fresh live run |
 
-A passing mock check can be useful local evidence, but cannot verify a live-required criterion. A mixed-mode result lists each component and mode separately. A required skipped check, failed command, missing credential, absent artifact, or unknown result does not pass. Preserve failed and skipped runs.
+A passing mock check can be useful local evidence, but cannot verify a live-required criterion. A mixed-mode result lists each component and execution mode separately. A recorded artifact's provenance does not change the mode of a later replay: state the original source mode and the current replay mode independently. A required skipped check, failed command, missing credential, absent artifact, or unknown result does not pass. Preserve failed and skipped runs.
+
+For a human review decision, `Pass` maps to the IE-09A result word `passed`, and `Fail` maps to `failed`. This is a wording crosswalk only; it does not define a machine enum, record shape, or serialization. Integration-evals owns defining the authoritative result vocabulary and any machine schema; do not assume an unpublished schema exists. Keep `skipped`, `error`, and `N/A` with its rationale distinct; none maps to pass or fail.
 
 ## Completion terms and transitions
 
@@ -41,6 +49,8 @@ An issue may move planned → in_progress → verified only after its acceptance
 The owning role proposes a status change and supplies the record. An accountable reviewer checks scope, exact revisions, test meaning, privacy, and whether the evidence meets the criterion. The integration-evals owner updates the master Markdown/JSON tracker after its evidence review, coordinating the listed criterion owner. A local issue, local acceptance view, or merged governance document cannot change master status.
 
 Evidence becomes stale after a relevant source contract, component, runtime, configuration, fixture, or test procedure changes. Re-run the affected check against the new revision and retain both records. A moving branch link is for navigation only; cite a full SHA for immutable evidence.
+
+These contributor records do not define or imply an integration-evals machine schema or implementation. Integration-evals owns the work to define and implement versioned result schemas and serialization, case/run identifiers, requirement-to-case-to-run-to-artifact joins, dependency/configuration fingerprints, coverage and orphan/dangling-reference validators, CI exports, and synchronization. Do not invent or claim those contracts or validators in this repository; use only schema and tooling that the integration-evals owner actually publishes.
 
 The evidence owner selects retention and access according to the actual storage and privacy policy. Until an authorized retention term exists, do not invent a duration. Restrict sensitive evidence to the smallest authorized audience and keep only sanitized metadata in shared indexes.
 
@@ -123,6 +133,28 @@ These four complete schema demonstrations are fictional training cases, not Jeve
 | Product provider | live; not authorized or attempted | N/A — not run | No artifact; cost UNKNOWN because no usage source was observed |
 
 The three component rows are independent supporting records; the hypothetical mock result cannot be aggregated into a sandbox/live pass.
+
+### Sample E — synthetic training record for a recorded live-origin artifact replayed offline
+
+This is a synthetic documentation drill, not program evidence. Its hypothetical input is described as an artifact recorded from an earlier live-mode source, then replayed by an offline mock checker. No source capture, replay, command, or human review actually occurred. The example's synthetic provenance as training text is separate from the hypothetical input's recorded/live-origin provenance.
+
+| Required field | Fictional supporting record |
+|---|---|
+| Acceptance IDs; owning repository/issue | N/A — this standalone training drill is not linked to a real criterion or issue. |
+| Exact tested SHA or manifest digest | UNKNOWN — neither an actual capture nor a replay was supplied. A real record would name the immutable source revision and exact checker revision, or a manifest digest. |
+| Runtime, configuration, environment, input/fixture identity and digest | UNKNOWN — the hypothetical captured artifact, its runtime/configuration, the offline checker environment, and all input digests are unspecified. |
+| Example text and evidence origin/provenance | This example text is synthetic training material. The hypothetical input would have origin `recorded`; its original source context/mode would be `live`. That provenance says how the hypothetical input was obtained, not how a later check ran. No actual source artifact exists in this example. |
+| Source and capture fields | Source repository/run or artifact ID, source revision, capture date/time and timezone, captured-by role, artifact reference/digest, access class, and redaction status are all UNKNOWN; none may be inferred. |
+| Replay source and transformation | The imagined replay source is that recorded live-origin artifact. Its source reference/digest and any filtering, normalization, or redaction are UNKNOWN. No replay actually took place. |
+| Replay procedure and execution mode | The hypothetical procedure would feed only the retained artifact to a checker with network/provider access disabled; command, checker revision, runtime/configuration, and replay date/time/timezone are UNKNOWN. Intended mode for that hypothetical check: mock/offline. Actual execution mode: N/A — not run. |
+| Command; expected and actual result | Command/procedure: UNKNOWN — not run. Illustrative expectation: the offline checker reports whether the captured input matches its fixture assertions. Illustrative scenario: pass. Actual result: N/A — no replay occurred; the illustrative pass is not evidence. |
+| Execution date and reviewer role | N/A — no replay or review occurred. |
+| Evidence URL/hash, access class, redaction | None — no source capture or replay artifact exists. A real record must use an authorized reference and identify its actual hash, access class, and redaction review. |
+| Criterion state; actual outcome; execution mode | Planned; N/A (no command ran); N/A (no current execution). The hypothetical replay mode is mock/offline and the hypothetical outcome is illustrative only. If a real human decision were Pass or Fail, use the standard's `Pass` → `passed` and `Fail` → `failed` wording crosswalk. |
+| Limitations; blocker owner | An offline replay can validate only the captured input against the exact checker/fixture revisions. It does not establish current live-service behavior or a new live run. Actual criterion, acceptance owner, and any blocker owner are UNKNOWN. |
+| Budget/cost/usage | UNKNOWN — no run or usage source was observed. Do not infer zero cost from an offline mock replay or this fictional example. |
+
+The example's key distinction is provenance versus execution: a future real record may truthfully say `recorded` input, originally `live`, replayed in `mock/offline` mode, with an actual replay result only after that replay runs and is reviewed. It must not relabel the replay as a fresh live pass.
 
 ### Decision drills for missing or stale evidence
 
