@@ -18,4 +18,7 @@ The responsible owner would acknowledge and coordinate investigation, containmen
 - Copy an approved policy to SECURITY.md in each destination repository and place the form at .github/ISSUE_TEMPLATE/security.yml only after the route works there.
 - Record the decision owner, date, verification evidence, and affected repository revision.
 
-Until these steps are complete, the GH-07 reporting acceptance and the security-form routing/preview acceptance remain open.
+The current plan defers GH-07 reporting and GH-03-I security-form routing; both issues are closed not
+planned, not completed or verified. If maintainers reopen either requirement, it remains blocked until
+the route and owners are confirmed and the safe walkthrough is complete. No private route is currently
+confirmed, so sensitive details must not be sent through a public issue.

@@ -41,14 +41,53 @@ def policy_violations(source: str, caller: str) -> list[str]:
     violations: list[str] = []
     if "pull_request_target:" in text or "workflow_run:" in text:
         violations.append("privileged trigger")
-    if re.search(r"(?m)^\s*contents:\s*write\s*$", text):
-        violations.append("write token permission")
+    if permission_violations(text):
+        violations.append("token permissions must be limited to contents: read")
     if re.search(r"(?m)^\s*secrets:\s*inherit\s*$", text):
         violations.append("inherited secrets")
     if re.search(r"\$\{\{\s*secrets\.", text):
         violations.append("secret reference")
     if re.search(r"(?m)^\s*secrets:\s*$", source):
         violations.append("declared reusable secret")
+    return violations
+
+
+def permission_violations(text: str) -> list[str]:
+    """Require the examples to use only the reviewed read-only token scope."""
+    violations: list[str] = []
+    lines = text.splitlines()
+    index = 0
+    while index < len(lines):
+        match = re.match(r"^([ \t]*)permissions:[ \t]*(.*?)\s*(?:#.*)?$", lines[index])
+        if not match:
+            index += 1
+            continue
+
+        indent = len(match.group(1))
+        inline = match.group(2).strip()
+        if inline:
+            if inline not in ("contents: read", "{ contents: read }"):
+                violations.append("non-minimal permissions declaration")
+            index += 1
+            continue
+
+        declared: list[tuple[str, str]] = []
+        cursor = index + 1
+        while cursor < len(lines):
+            line = lines[cursor]
+            stripped = line.strip()
+            line_indent = len(line) - len(line.lstrip(" \t"))
+            if stripped and line_indent <= indent:
+                break
+            if stripped and not stripped.startswith("#"):
+                entry = re.fullmatch(
+                    r"([a-z][a-z0-9_-]*):[ \t]*([a-z][a-z0-9_-]*)", stripped
+                )
+                declared.append(entry.groups() if entry else ("unknown", "unknown"))
+            cursor += 1
+        if declared != [("contents", "read")]:
+            violations.append("non-minimal permissions declaration")
+        index = cursor
     return violations
 
 
@@ -408,12 +447,26 @@ class ReusableWorkflowFixtureTests(unittest.TestCase):
         unsafe = unsafe.replace("on:\n  pull_request:", "on:\n  pull_request_target:", 1)
         unsafe += "\n    secrets: inherit\n"
         violations = policy_violations(self.source_text, unsafe)
-        self.assertIn("write token permission", violations)
+        self.assertIn(
+            "token permissions must be limited to contents: read", violations
+        )
         self.assertIn("privileged trigger", violations)
         self.assertIn("inherited secrets", violations)
 
         explicit_secret = self.caller_text + "\n# synthetic unsafe mutation\n${{ secrets.DEMO_TOKEN }}\n"
         self.assertIn("secret reference", policy_violations(self.source_text, explicit_secret))
+
+        unsafe_permission_mutations = (
+            self.caller_text.replace("permissions:\n  contents: read", "permissions: write-all", 1),
+            self.caller_text.replace("contents: read", "id-token: write", 1),
+            self.caller_text.replace("contents: read", "actions: write", 1),
+        )
+        for mutated in unsafe_permission_mutations:
+            with self.subTest(permission_mutation=mutated.splitlines()[4:8]):
+                self.assertIn(
+                    "token permissions must be limited to contents: read",
+                    policy_violations(self.source_text, mutated),
+                )
 
 
 if __name__ == "__main__":

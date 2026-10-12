@@ -1,9 +1,12 @@
 # Issue forms
 
-The `GH-ISSUE-FORMS@1.0.0` contract is tracked by
-[GH-03-I](https://github.com/Jevelopers-neatHack-2026/.github/issues/13). This branch contains a
-candidate: five active forms and one security draft held outside the chooser until a private reporting
-destination and responsible owner are confirmed. This is a partial candidate, not six-form acceptance.
+The published `GH-ISSUE-FORMS@1.0.0` contract is tracked by
+[GH-03-I](https://github.com/Jevelopers-neatHack-2026/.github/issues/13). It provides five active
+forms and keeps a security draft outside the chooser because no private reporting destination or
+responsible owner is confirmed. The current main source is a partial publication, not six-form
+acceptance. This review branch also disables blank issue submissions while that route is unresolved;
+the five active forms retain their redaction warning. This change does not provide a private report
+route or make the form fields safe for vulnerability details.
 The execution-policy pack version is `1.1.0`; it is separate from this form-contract version.
 
 The chooser configuration and five active forms are in [`.github/ISSUE_TEMPLATE/`](../.github/ISSUE_TEMPLATE/).
@@ -11,12 +14,12 @@ The parked security draft is [`pending/security.yml`](pending/security.yml).
 
 | Form | State | File | Labels configured | Type-specific prompts |
 | --- | --- | --- | --- | --- |
-| Feature | Active candidate | [`feature.yml`](../.github/ISSUE_TEMPLATE/feature.yml) | `type:implementation`, `enhancement` | user outcome |
-| Bug | Active candidate | [`bug.yml`](../.github/ISSUE_TEMPLATE/bug.yml) | `type:bug`, `bug` | sanitized repro, expected vs actual, environment/revision, regression scope |
-| Integration | Active candidate | [`integration.yml`](../.github/ISSUE_TEMPLATE/integration.yml) | `type:implementation`, `cross-repo` | producer, consumers, contract/version, handoff tests |
-| Research / decision | Active candidate | [`research-decision.yml`](../.github/ISSUE_TEMPLATE/research-decision.yml) | `type:docs`, `question` | question, alternatives, bounded experiment/budget, decision owner/output, follow-on |
+| Feature | Active in published source | [`feature.yml`](../.github/ISSUE_TEMPLATE/feature.yml) | `type:implementation`, `enhancement` | user outcome |
+| Bug | Active in published source | [`bug.yml`](../.github/ISSUE_TEMPLATE/bug.yml) | `type:bug`, `bug` | sanitized repro, expected vs actual, environment/revision, regression scope |
+| Integration | Active in published source | [`integration.yml`](../.github/ISSUE_TEMPLATE/integration.yml) | `type:implementation`, `cross-repo` | producer, consumers, contract/version, handoff tests |
+| Research / decision | Active in published source | [`research-decision.yml`](../.github/ISSUE_TEMPLATE/research-decision.yml) | `type:docs`, `question` | question, alternatives, bounded experiment/budget, decision owner/output, follow-on |
 | Security | **Pending; not in chooser** | [`pending/security.yml`](pending/security.yml) | `type:bug` (draft only) | non-sensitive coordination warning, no-secret confirmation |
-| Backlog / acceptance audit | Active candidate | [`backlog-audit.yml`](../.github/ISSUE_TEMPLATE/backlog-audit.yml) | `type:chore` | criterion-to-evidence coverage, gaps, release impact |
+| Backlog / acceptance audit | Active in published source | [`backlog-audit.yml`](../.github/ISSUE_TEMPLATE/backlog-audit.yml) | `type:chore` | criterion-to-evidence coverage, gaps, release impact |
 
 ## Common fields and required inputs
 
@@ -49,7 +52,9 @@ security contact link. The public `GH-07` tracking issue is not a reporting dest
 or publish the draft until maintainers confirm the private route, access expectations and owner, then
 complete a synthetic private-route walkthrough. GitHub private vulnerability reporting is not claimed
 to be enabled. The five active forms do not satisfy the sixth-form or security-routing acceptance
-criteria; `GH-03-I` remains open.
+criteria. At the user's direction, `GH-03-I` (#13) was closed **not planned**, not completed or
+verified; those criteria are deferred and may be reconsidered later. No private route is confirmed.
+Do not send sensitive details through a public issue.
 
 ## Source, destination and link checks
 
@@ -73,9 +78,10 @@ for GitHub's native preview.
 
 ## Versioned publication and adoption record
 
-This branch is a candidate for `GH-ISSUE-FORMS@1.0.0`. The contract is published only after the
-reviewed change reaches the `.github` default branch; that publication does not mean any destination
-has rolled out or verified it. Record the full merge SHA and use immutable links such as
+The five forms were published as `GH-ISSUE-FORMS@1.0.0` on the `.github` default branch. This review
+branch contains a chooser hardening candidate; it has not been published or assigned a new contract
+version. Once a reviewed change reaches the default branch, record its full merge SHA and use
+immutable links such as
 `https://github.com/Jevelopers-neatHack-2026/.github/blob/<40-character-commit-sha>/.github/ISSUE_TEMPLATE/feature.yml`
 when a consumer copies a form. Inherited defaults still follow the source default branch and are not
 version-pinned by GitHub.
