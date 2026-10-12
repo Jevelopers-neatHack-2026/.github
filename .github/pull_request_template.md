@@ -1,8 +1,7 @@
 <!--
 Jevelopers neatHack 2026 program pull request template (GH-03-P).
-Template interface: GH-PR-TEMPLATE@1.0.0. This names the section/field contract; it does not
-assert that this source revision is merged, that any repository adopted it, or that review
-enforcement is configured.
+Template interface: GH-PR-TEMPLATE@1.0.0. The interface version names the section/field contract; it
+does not assert that any destination adopted it or that review enforcement is configured.
 Replace every <placeholder>. Write "None" or "N/A — <reason>" instead of deleting a section.
 Checkboxes are author claims for the reviewer to check. They do not prove that reviews,
 branch protection, required checks or provider calls are configured or happened.

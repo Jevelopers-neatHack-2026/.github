@@ -39,7 +39,7 @@ The master acceptance IDs and their status are owned by integration-evals. A mer
 
 The [local ownership view](architecture/OWNERSHIP.md) defines this repository's documentation responsibility. The [local acceptance view](architecture/ACCEPTANCE.md) selects criteria but is not the master tracker.
 
-Canonical architecture and the implementation plan live in getticketstub.com. Canonical schemas live in shared-contracts. Master acceptance state and evidence records live in integration-evals. Each repository owns its local implementation instructions, checks, settings, and adoption record. See the [source registry](../standards/architecture-linking.md) for immutable inspected references and link rules.
+The maintained current architecture and integration companion is being published in getticketstub.com PR [#117](https://github.com/Jevelopers-neatHack-2026/getticketstub.com/pull/117); its stable [main-branch link](https://github.com/Jevelopers-neatHack-2026/getticketstub.com/blob/main/docs/architecture/CURRENT-STATE.md) resolves after that PR merges. Until then, the immutable [architecture kit v1.0](https://github.com/Jevelopers-neatHack-2026/getticketstub.com/blob/7f59d33922a0585205547d490b288b49eed32419/docs/architecture-kit/v1.0/docs/architecture.md) remains dated design intent. The current implementation plan remains with getticketstub.com; canonical schemas live in shared-contracts; master acceptance state and evidence records live in integration-evals. Each repository owns its local implementation instructions, checks, settings, and adoption record. See the [source registry](../standards/architecture-linking.md) for inspected revisions and link rules.
 
 ## Template and installation boundaries
 

@@ -4,8 +4,8 @@ The published `GH-ISSUE-FORMS@1.0.0` contract is tracked by
 [GH-03-I](https://github.com/Jevelopers-neatHack-2026/.github/issues/13). It provides five active
 forms and keeps a security draft outside the chooser because no private reporting destination or
 responsible owner is confirmed. The current main source is a partial publication, not six-form
-acceptance. This review branch also disables blank issue submissions while that route is unresolved;
-the five active forms retain their redaction warning. This change does not provide a private report
+acceptance. The published chooser disables blank issue submissions while that route is unresolved;
+the five active forms retain their redaction warning. The chooser change does not provide a private report
 route or make the form fields safe for vulnerability details.
 The execution-policy pack version is `1.1.0`; it is separate from this form-contract version.
 
@@ -78,9 +78,9 @@ for GitHub's native preview.
 
 ## Versioned publication and adoption record
 
-The five forms were published as `GH-ISSUE-FORMS@1.0.0` on the `.github` default branch. This review
-branch contains a chooser hardening candidate; it has not been published or assigned a new contract
-version. Once a reviewed change reaches the default branch, record its full merge SHA and use
+The five forms were published as `GH-ISSUE-FORMS@1.0.0` on the `.github` default branch. The published
+chooser configuration disables blank issue submissions; no new form fields or contract version were
+introduced by that hardening. For a later reviewed change, record its full merge SHA and use
 immutable links such as
 `https://github.com/Jevelopers-neatHack-2026/.github/blob/<40-character-commit-sha>/.github/ISSUE_TEMPLATE/feature.yml`
 when a consumer copies a form. Inherited defaults still follow the source default branch and are not
