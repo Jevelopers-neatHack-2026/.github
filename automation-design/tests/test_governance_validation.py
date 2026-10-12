@@ -239,6 +239,56 @@ class WorkflowPolicyValidatorTests(unittest.TestCase):
         self.assertEqual([], validator.validate_workflow_document(runnable_workflow(), "source"))
         self.assertEqual([], validator.validate_workflow_document(caller_workflow(), "caller"))
 
+    def test_secret_context_references_fail_across_supported_expression_forms(self) -> None:
+        expressions = (
+            "${{ secrets.DEMO_TOKEN }}",
+            "${{ secrets['DEMO_TOKEN'] }}",
+            "${{ toJSON(secrets) }}",
+            "${{ format('{0}', secrets.DEMO_TOKEN) }}",
+            "${{ format('{0}', SeCrEtS['DEMO_TOKEN']) }}",
+            "${{secrets.DEMO_TOKEN}}",
+            "${{secrets}}",
+            "${{github.ref}}-${{secrets.DEMO_TOKEN}}",
+            "${{github.ref}}${{toJSON(secrets)}}",
+        )
+        for expression in expressions:
+            with self.subTest(expression=expression):
+                document = runnable_workflow()
+                document["jobs"]["validate"]["steps"][0]["env"] = {"VALUE": expression}
+                errors = validator.validate_workflow_document(document, "secret-reference")
+                self.assertTrue(
+                    any("must not declare, reference, or inherit secrets" in error for error in errors),
+                    errors,
+                )
+
+    def test_secret_context_literals_and_other_context_properties_are_safe(self) -> None:
+        safe_values = (
+            "${{ format('{0}', 'secrets.DEMO_TOKEN') }}",
+            "${{ 'it''s only the word secrets.DEMO_TOKEN' }}",
+            "${{ 'literal }} secrets.DEMO_TOKEN' }}",
+            "${{ github['secrets'] }}",
+            "echo secrets.DEMO_TOKEN",
+        )
+        for value in safe_values:
+            with self.subTest(value=value):
+                document = runnable_workflow()
+                document["jobs"]["validate"]["steps"][0]["env"] = {"VALUE": value}
+                self.assertEqual([], validator.validate_workflow_document(document, "safe-literal"))
+
+        # GitHub also permits the `${{ }}` wrapper to be omitted for `if`.
+        document = runnable_workflow()
+        document["jobs"]["validate"]["steps"][0]["if"] = (
+            "contains(github.ref, 'secrets.DEMO_TOKEN')"
+        )
+        self.assertEqual([], validator.validate_workflow_document(document, "safe-if-literal"))
+
+        document["jobs"]["validate"]["steps"][0]["if"] = "toJSON(secrets) != ''"
+        errors = validator.validate_workflow_document(document, "secret-if-reference")
+        self.assertTrue(
+            any("must not declare, reference, or inherit secrets" in error for error in errors),
+            errors,
+        )
+
     def test_write_scope_and_privileged_event_fail(self) -> None:
         document = runnable_workflow()
         document["permissions"] = {"contents": "write"}

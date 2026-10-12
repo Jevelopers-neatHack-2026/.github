@@ -791,6 +791,101 @@ def _permission_map(value) -> bool:
     )
 
 
+def _expression_references_secrets_context(expression: str) -> bool:
+    """Detect a root `secrets` identifier outside GitHub expression literals.
+
+    This intentionally recognizes only the lexical detail needed by this
+    repository's policy. It is not a GitHub Actions expression parser.
+    """
+    index = 0
+    in_string = False
+    while index < len(expression):
+        char = expression[index]
+        if in_string:
+            if char == "'":
+                if index + 1 < len(expression) and expression[index + 1] == "'":
+                    index += 2
+                    continue
+                in_string = False
+            index += 1
+            continue
+        if char == "'":
+            in_string = True
+            index += 1
+            continue
+
+        end = index + len("secrets")
+        candidate = expression[index:end]
+        if candidate.isascii() and candidate.lower() == "secrets":
+            before = expression[index - 1] if index else ""
+            after = expression[end] if end < len(expression) else ""
+            identifier_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-"
+            if (not before or before not in identifier_chars) and (
+                not after or after not in identifier_chars
+            ):
+                previous_nonspace = index - 1
+                while previous_nonspace >= 0 and expression[previous_nonspace].isspace():
+                    previous_nonspace -= 1
+                # A property named `secrets` on another context is not the
+                # GitHub Actions `secrets` context itself.
+                if previous_nonspace < 0 or expression[previous_nonspace] != ".":
+                    return True
+        index += 1
+
+    # An unterminated quote is not a valid expression literal. Fail closed if
+    # it contains the token, rather than allowing malformed syntax to hide it.
+    if in_string:
+        return re.search(
+            r"(?<![A-Za-z0-9_-])secrets(?![A-Za-z0-9_-])",
+            expression,
+            re.IGNORECASE | re.ASCII,
+        ) is not None
+    return False
+
+
+def _has_secret_context_reference(value: str, *, implicit_if_expression: bool = False) -> bool:
+    """Scan explicit GitHub expressions and, for `if`, its optional bare form."""
+    cursor = 0
+    found_expression = False
+    while True:
+        start = value.find("${{", cursor)
+        if start < 0:
+            break
+        found_expression = True
+        body_start = start + len("${{")
+        index = body_start
+        in_string = False
+        while index < len(value):
+            char = value[index]
+            if in_string:
+                if char == "'":
+                    if index + 1 < len(value) and value[index + 1] == "'":
+                        index += 2
+                        continue
+                    in_string = False
+            elif char == "'":
+                in_string = True
+            elif value.startswith("}}", index):
+                if _expression_references_secrets_context(value[body_start:index]):
+                    return True
+                cursor = index + 2
+                break
+            index += 1
+        else:
+            # An incomplete expression is invalid workflow syntax. Scan its
+            # remaining text conservatively so a missing terminator cannot
+            # hide a context reference.
+            return re.search(
+                r"(?<![A-Za-z0-9_-])secrets(?![A-Za-z0-9_-])",
+                value[body_start:],
+                re.IGNORECASE | re.ASCII,
+            ) is not None
+
+    if implicit_if_expression and not found_expression:
+        return _expression_references_secrets_context(value)
+    return False
+
+
 def validate_workflow_document(document, label="workflow") -> list[str]:
     errors: list[str] = []
     if not _is_mapping(document):
@@ -872,7 +967,7 @@ def validate_workflow_document(document, label="workflow") -> list[str]:
                         errors.append("{} checkout must set `persist-credentials: false`".format(step_context))
             elif "run" not in step:
                 errors.append("{} must declare `uses` or `run`".format(step_context))
-    def has_secret_reference(value, seen=None):
+    def has_secret_reference(value, seen=None, implicit_if_expression=False):
         if seen is None:
             seen = set()
         if isinstance(value, dict):
@@ -882,14 +977,24 @@ def validate_workflow_document(document, label="workflow") -> list[str]:
             seen.add(identity)
             if "secrets" in value and value["secrets"] not in (None, {}, []):
                 return True
-            return any(has_secret_reference(child, seen) for child in value.values())
+            return any(
+                has_secret_reference(
+                    child,
+                    seen,
+                    implicit_if_expression=(key == "if"),
+                )
+                for key, child in value.items()
+            )
         if isinstance(value, list):
             identity = id(value)
             if identity in seen:
                 return False
             seen.add(identity)
             return any(has_secret_reference(child, seen) for child in value)
-        return isinstance(value, str) and bool(re.search(r"\$\{\{\s*secrets\.", value))
+        return isinstance(value, str) and _has_secret_context_reference(
+            value,
+            implicit_if_expression=implicit_if_expression,
+        )
 
     if has_secret_reference(document):
         errors.append("{} must not declare, reference, or inherit secrets".format(label))

@@ -6,6 +6,22 @@ This page records dated label observations and a proposed way to use labels loca
 
 At approximately 17:29 UTC, current public issue label objects confirmed `type:docs` on [issue #9](https://github.com/Jevelopers-neatHack-2026/.github/issues/9), `type:implementation` on [issue #14](https://github.com/Jevelopers-neatHack-2026/.github/issues/14), and `cross-repo` on [issue #12](https://github.com/Jevelopers-neatHack-2026/.github/issues/12). This is a partial sample of labels attached to those issues, not the full catalog. The label-catalog endpoint and public labels page were unavailable during this check. The current existence of other names, including `type:chore`, `type:bug`, `bug`, `enhancement`, and `question`, remains unknown; inability to retrieve the catalog does not show that any label is absent. Verify a label in the destination before configuring or applying it there.
 
+## Closed-issue label discrepancies (2026-10-12)
+
+A read-only issue REST observation captured at 19:22:37 UTC found these labels on closed issues. It is not a full label-catalog check.
+
+| Issue | Observed issue state | Relevant observed labels |
+|---|---|---|
+| [#3](https://github.com/Jevelopers-neatHack-2026/.github/issues/3) | Closed, completed | `state:in-progress`, `required-for-v1` |
+| [#5](https://github.com/Jevelopers-neatHack-2026/.github/issues/5) | Closed, completed | `state:planned`, `required-for-v1` |
+| [#16](https://github.com/Jevelopers-neatHack-2026/.github/issues/16) | Closed, completed | `state:planned`, `required-for-v1` |
+| [#11](https://github.com/Jevelopers-neatHack-2026/.github/issues/11) | Closed, not planned | `state:planned`, `required-for-v1` |
+| [#13](https://github.com/Jevelopers-neatHack-2026/.github/issues/13) | Closed, not planned | `state:in-progress`, `required-for-v1` |
+
+The closed/completed or closed/not-planned dispositions and their closure evidence remain authoritative: see the [GH-08 acceptance receipt](https://github.com/Jevelopers-neatHack-2026/.github/issues/5#issuecomment-6122075793), [GH-11 dated gate decision](https://github.com/Jevelopers-neatHack-2026/.github/issues/16#issuecomment-6122141536), [GH-11 scope addendum](https://github.com/Jevelopers-neatHack-2026/.github/issues/16#issuecomment-6116512227), [GH-03-I scope addendum](https://github.com/Jevelopers-neatHack-2026/.github/issues/3#issuecomment-6116512413), and [epic closure receipt](https://github.com/Jevelopers-neatHack-2026/.github/issues/3#issuecomment-6122142963). An old `state:*` label does not reopen work or verify it. The `required-for-v1` flag on #11 and #13 conflicts with their explicit reduced-scope deferral, not with their closed/not-planned disposition.
+
+**Unapplied cleanup proposal:** after maintainer confirmation, remove only the listed `state:in-progress` / `state:planned` labels from these five closed issues, and reconcile `required-for-v1` on #11 and #13 with the recorded deferral. Preserve every other label and all closed dispositions. No label change was applied by this observation; recheck the issue objects and authority before any future mutation.
+
 ## Dated taxonomy inventory and planning rules
 
 The last complete read-only API inventory available here, at 2026-10-11 03:05:46 UTC, found the following 27 labels in this `.github` repository. This table is a historical inventory, not a current full catalog. The taxonomy dimensions and usage rules below describe the names observed then and propose local handling; they do not apply labels or configure synchronization.
