@@ -8,6 +8,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import yaml
+
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "automation-design/examples/reusable/.github/workflows/docs-check.yml"
@@ -36,12 +38,13 @@ def extract_node_script(workflow: str) -> str:
     return "\n".join(line[10:] if line.startswith("          ") else "" for line in lines) + "\n"
 
 
-def policy_violations(source: str, caller: str) -> list[str]:
-    text = source + "\n" + caller
+def policy_violations(source: str, *callers: str) -> list[str]:
+    workflows = (source, *callers)
+    text = "\n".join(workflows)
     violations: list[str] = []
     if "pull_request_target:" in text or "workflow_run:" in text:
         violations.append("privileged trigger")
-    if permission_violations(text):
+    if any(permission_violations(workflow) for workflow in workflows):
         violations.append("token permissions must be limited to contents: read")
     if re.search(r"(?m)^\s*secrets:\s*inherit\s*$", text):
         violations.append("inherited secrets")
@@ -52,42 +55,45 @@ def policy_violations(source: str, caller: str) -> list[str]:
     return violations
 
 
+class UniqueKeySafeLoader(yaml.SafeLoader):
+    """Reject ambiguous duplicate keys instead of choosing one declaration."""
+
+    def construct_mapping(self, node, deep=False):
+        mapping = super().construct_mapping(node, deep=deep)
+        if len(mapping) != len(node.value):
+            raise yaml.constructor.ConstructorError(
+                None, None, "duplicate mapping key", node.start_mark
+            )
+        return mapping
+
+
 def permission_violations(text: str) -> list[str]:
-    """Require the examples to use only the reviewed read-only token scope."""
+    """Check one workflow's declarations and every job's effective permissions."""
+    try:
+        workflow = yaml.load(text, Loader=UniqueKeySafeLoader)
+    except yaml.YAMLError:
+        return ["invalid or ambiguous workflow YAML"]
+    if not isinstance(workflow, dict) or not isinstance(workflow.get("jobs"), dict):
+        return ["unsupported workflow or jobs declaration"]
+
+    def is_minimal(permissions) -> bool:
+        # An explicit map disables omitted scopes; {} disables all scopes.
+        return isinstance(permissions, dict) and all(
+            scope == "contents" and level in ("read", "none")
+            for scope, level in permissions.items()
+        )
+
     violations: list[str] = []
-    lines = text.splitlines()
-    index = 0
-    while index < len(lines):
-        match = re.match(r"^([ \t]*)permissions:[ \t]*(.*?)\s*(?:#.*)?$", lines[index])
-        if not match:
-            index += 1
-            continue
-
-        indent = len(match.group(1))
-        inline = match.group(2).strip()
-        if inline:
-            if inline not in ("contents: read", "{ contents: read }"):
-                violations.append("non-minimal permissions declaration")
-            index += 1
-            continue
-
-        declared: list[tuple[str, str]] = []
-        cursor = index + 1
-        while cursor < len(lines):
-            line = lines[cursor]
-            stripped = line.strip()
-            line_indent = len(line) - len(line.lstrip(" \t"))
-            if stripped and line_indent <= indent:
-                break
-            if stripped and not stripped.startswith("#"):
-                entry = re.fullmatch(
-                    r"([a-z][a-z0-9_-]*):[ \t]*([a-z][a-z0-9_-]*)", stripped
-                )
-                declared.append(entry.groups() if entry else ("unknown", "unknown"))
-            cursor += 1
-        if declared != [("contents", "read")]:
-            violations.append("non-minimal permissions declaration")
-        index = cursor
+    default = workflow.get("permissions")
+    if "permissions" in workflow and not is_minimal(default):
+        violations.append("non-minimal workflow permissions")
+    for job in workflow["jobs"].values():
+        if not isinstance(job, dict):
+            violations.append("unsupported job declaration")
+        elif not is_minimal(job.get("permissions", default)):
+            # Without an explicit job or workflow map, the repository default
+            # is unknown and may grant writes. Job maps replace workflow maps.
+            violations.append("non-minimal or unknown job permissions")
     return violations
 
 
@@ -192,7 +198,7 @@ class ReusableWorkflowFixtureTests(unittest.TestCase):
         self.assertEqual(
             [],
             policy_violations(
-                self.source_text, self.caller_text + "\n" + self.template_text
+                self.source_text, self.caller_text, self.template_text
             ),
         )
 
@@ -467,6 +473,87 @@ class ReusableWorkflowFixtureTests(unittest.TestCase):
                     "token permissions must be limited to contents: read",
                     policy_violations(self.source_text, mutated),
                 )
+
+    def test_quoted_job_permissions_bypass_is_rejected(self) -> None:
+        for key in ('"permissions"', "'permissions'"):
+            with self.subTest(key=key):
+                mutated = self.caller_text.replace(
+                    "    permissions:\n      contents: read",
+                    f"    {key}: write-all",
+                )
+                self.assertEqual(
+                    "write-all", yaml.safe_load(mutated)["jobs"]["report"]["permissions"]
+                )
+                self.assertIn(
+                    "token permissions must be limited to contents: read",
+                    policy_violations(self.source_text, mutated),
+                )
+
+    def test_flow_permissions_and_added_write_scopes_are_rejected(self) -> None:
+        for permissions in (
+            "write-all",
+            "{contents: write}",
+            "{contents: read, id-token: write}",
+            "{contents: read, actions: write}",
+        ):
+            for key in ("permissions", '"permissions"'):
+                with self.subTest(permissions=permissions, key=key):
+                    workflow = (
+                        "permissions: {contents: read}\n"
+                        "jobs: {first: {permissions: {}}, report: {"
+                        + key + ": " + permissions + "}}\n"
+                    )
+                    self.assertTrue(permission_violations(workflow))
+
+    def test_unsafe_defaults_and_unknown_inherited_permissions_are_rejected(self) -> None:
+        workflows = (
+            '"permissions": write-all\njobs: {report: {}}\n',
+            "permissions: {contents: read, id-token: write}\njobs: {report: {}}\n",
+            "permissions: write-all\njobs: {report: {permissions: {contents: read}}}\n",
+            "jobs: {first: {permissions: {}}, report: {}}\n",
+        )
+        for workflow in workflows:
+            with self.subTest(workflow=workflow):
+                self.assertTrue(permission_violations(workflow))
+
+    def test_safe_minimal_permissions_and_inheritance_are_accepted(self) -> None:
+        workflows = (
+            '"permissions": {"contents": "read"}\njobs: {report: {}}\n',
+            "permissions: {}\njobs: {report: {}}\n",
+            "permissions: {contents: read}\njobs: {report: {permissions: {}}}\n",
+            "jobs: {report: {'permissions': {'contents': 'read'}}}\n",
+            "jobs: {report: {permissions: {contents: none}}}\n",
+        )
+        for workflow in workflows:
+            with self.subTest(workflow=workflow):
+                self.assertEqual([], permission_violations(workflow))
+
+    def test_workflow_documents_are_checked_separately(self) -> None:
+        safe = "permissions: {contents: read}\njobs: {report: {}}\n"
+        unsafe = "permissions: write-all\njobs: {report: {}}\n"
+        for workflows in ((unsafe, safe), (safe, unsafe), (safe, safe, unsafe)):
+            with self.subTest(workflows=workflows):
+                self.assertIn(
+                    "token permissions must be limited to contents: read",
+                    policy_violations(*workflows),
+                )
+        self.assertEqual([], policy_violations(safe, safe, safe))
+
+    def test_unsupported_or_ambiguous_permission_forms_fail_closed(self) -> None:
+        workflows = (
+            "permissions: {contents: read}\npermissions: write-all\njobs: {report: {}}\n",
+            "permissions: write-all\npermissions: {contents: read}\njobs: {report: {}}\n",
+            "jobs: {report: {permissions: null}}\n",
+            "jobs: {report: {permissions: [contents, read]}}\n",
+            "jobs: {report: {permissions: {contents: read-all}}}\n",
+            "jobs: {report: {permissions: read-all}}\n",
+            "jobs: {report: null}\n",
+            "jobs: []\n",
+            "jobs: {report: {permissions: {}}}\n---\njobs: {other: {}}\n",
+        )
+        for workflow in workflows:
+            with self.subTest(workflow=workflow):
+                self.assertTrue(permission_violations(workflow))
 
 
 if __name__ == "__main__":
