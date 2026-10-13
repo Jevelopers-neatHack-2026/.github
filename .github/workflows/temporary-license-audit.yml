@@ -1,0 +1,149 @@
+name: Temporary licensing source audit
+on:
+  push:
+    branches: ["docs/jevelopers-license-audit-20261013"]
+permissions:
+  contents: read
+concurrency:
+  group: jevelopers-license-audit-20261013
+  cancel-in-progress: false
+jobs:
+  collect:
+    if: github.repository == 'Jevelopers-neatHack-2026/.github'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Collect pinned public text and licensing inventory
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          """Read-only public-source inventory. No downloaded source is executed."""
+          import hashlib
+          import io
+          import json
+          import os
+          from pathlib import Path, PurePosixPath
+          import re
+          import tarfile
+          from urllib.error import HTTPError
+          from urllib.parse import urlparse
+          from urllib.request import Request, build_opener, HTTPRedirectHandler
+          import zipfile
+          ORG = 'Jevelopers-neatHack-2026'
+          EXPECTED = ['.github', 'agent-harness', 'brand-kit', 'cost-intelligence', 'creative-engine', 'docs', 'event-intelligence', 'fulfillment-connectors', 'getticketstub.com', 'integration-evals', 'Jevelopers-GetTicketStub.com-Submission', 'landing-page-repo', 'marketing-material', 'print-production', 'shared-contracts', 'team-dashboard']
+          TEXT_EXTS = {'.md', '.markdown', '.txt', '.json', '.jsonl', '.yaml', '.yml', '.py', '.js', '.mjs', '.cjs', '.ts', '.tsx', '.jsx', '.html', '.css', '.scss', '.toml', '.ini', '.cfg', '.sh', '.bash', '.sql', '.xml', '.csv', '.properties', '.in'}
+          TOKEN = os.environ.get('GH_TOKEN', '')
+          class ScopedRedirect(HTTPRedirectHandler):
+              def redirect_request(self, req, fp, code, msg, headers, newurl):
+                  if urlparse(newurl).hostname not in {'api.github.com', 'codeload.github.com', 'raw.githubusercontent.com'}:
+                      raise RuntimeError('Unexpected redirect host')
+                  nxt = super().redirect_request(req, fp, code, msg, headers, newurl)
+                  if nxt is not None and urlparse(newurl).hostname != urlparse(req.full_url).hostname:
+                      nxt.remove_header('Authorization')
+                  return nxt
+          OPENER = build_opener(ScopedRedirect())
+          def read(url, maximum=10000000):
+              headers = {'User-Agent': 'Jevelopers-licensing-audit', 'Accept': 'application/vnd.github+json'}
+              if urlparse(url).hostname == 'api.github.com' and TOKEN:
+                  headers['Authorization'] = 'Bearer ' + TOKEN
+              with OPENER.open(Request(url, headers=headers), timeout=90) as response:
+                  data = response.read(maximum + 1)
+              if len(data) > maximum:
+                  raise ValueError('Response exceeds audit size bound')
+              return data
+          def api(path):
+              return json.loads(read('https://api.github.com/' + path))
+          def optional(path):
+              try:
+                  return api(path)
+              except HTTPError as e:
+                  return {'unavailable_http_status': e.code}
+          out = Path('licensing-audit-output')
+          out.mkdir(exist_ok=True)
+          manifest = {'organization': ORG, 'run_id': os.environ.get('GITHUB_RUN_ID'), 'binary_content_included': False, 'repositories': {}, 'inventory_limit': 500}
+          public = {}
+          for page in range(1, 6):
+              rows = api(f'orgs/{ORG}/repos?type=public&per_page=100&page={page}')
+              for row in rows:
+                  if row['owner']['login'].lower() == ORG.lower() and row['private'] is False:
+                      public[row['name']] = row
+              if len(rows) < 100:
+                  break
+          else:
+              raise RuntimeError('Repository listing pagination exceeded bound')
+          names = sorted(set(EXPECTED) | set(public))
+          if len(names) > 100:
+              raise RuntimeError('Audit repository count exceeds bound')
+          with zipfile.ZipFile(out / 'public-source-text.zip', 'w', zipfile.ZIP_DEFLATED) as z:
+              for name in names:
+                  if name not in public:
+                      manifest['repositories'][name] = {'status': 'not_in_current_public_listing'}
+                      print(name, 'not in current public listing')
+                      continue
+                  if not re.fullmatch(r'[A-Za-z0-9_.-]+', name):
+                      raise ValueError('Unsafe repository name')
+                  row = public[name]
+                  full = f'{ORG}/{name}'
+                  ref = api(f'repos/{full}/git/ref/heads/{row["default_branch"]}')
+                  sha = ref['object']['sha']
+                  commit = api(f'repos/{full}/git/commits/{sha}')
+                  tree = api(f'repos/{full}/git/trees/{commit["tree"]["sha"]}?recursive=1')
+                  if tree.get('truncated'):
+                      raise RuntimeError('Truncated source tree: ' + name)
+                  entries = {e['path']: e for e in tree['tree'] if e['type'] == 'blob'}
+                  record = {'status': 'captured', 'base_sha': sha, 'tree_sha': commit['tree']['sha'], 'default_branch': row['default_branch'], 'archived': row['archived'], 'fork': row['fork'], 'license': row.get('license'), 'files': entries, 'captured_paths': [], 'omitted_paths': [], 'open_prs': [], 'branch': optional(f'repos/{full}/branches/{row["default_branch"]}'), 'rulesets': optional(f'repos/{full}/rulesets?includes_parents=true')}
+                  pulls = api(f'repos/{full}/pulls?state=open&per_page=100')
+                  record['open_prs_may_be_truncated'] = len(pulls) == 100
+                  for pr in pulls:
+                      record['open_prs'].append({'number': pr['number'], 'title': pr['title'], 'url': pr['html_url'], 'head_sha': pr['head']['sha'], 'head_ref': pr['head']['ref'], 'base_ref': pr['base']['ref'], 'author': pr['user']['login'], 'draft': pr['draft'], 'updated_at': pr['updated_at']})
+                  branch = record['branch']
+                  record['branch'] = {k: branch[k] for k in ['name', 'protected', 'protection', 'unavailable_http_status'] if k in branch}
+                  archive = read(f'https://codeload.github.com/{full}/tar.gz/{sha}', 220000000)
+                  with tarfile.open(fileobj=io.BytesIO(archive), mode='r:gz') as tar:
+                      for member in tar:
+                          parts = PurePosixPath(member.name).parts
+                          if len(parts) < 2 or not member.isfile():
+                              continue
+                          rel = PurePosixPath(*parts[1:])
+                          if rel.is_absolute() or '..' in rel.parts or '\\' in str(rel):
+                              raise ValueError('Unsafe archive path')
+                          path = str(rel)
+                          entry = entries.get(path)
+                          if entry is None:
+                              raise ValueError('Archive member absent from pinned tree')
+                          if name == 'Jevelopers-GetTicketStub.com-Submission' and rel.parts[0] == 'repositories':
+                              record['omitted_paths'].append(path)
+                              continue
+                          eligible = rel.suffix.lower() in TEXT_EXTS or rel.name in {'LICENSE', 'LICENCE', 'NOTICE', 'COPYING', 'Makefile', 'Dockerfile', 'AGENTS.md', '.gitignore', '.gitattributes', '.node-version', '.npmrc', '.nvmrc', '.env.example'}
+                          if not eligible or member.size > 5000000:
+                              record['omitted_paths'].append(path)
+                              continue
+                          data = tar.extractfile(member).read(5000001)
+                          try:
+                              data.decode('utf-8')
+                          except UnicodeDecodeError:
+                              record['omitted_paths'].append(path)
+                              continue
+                          if b'\x00' in data:
+                              record['omitted_paths'].append(path)
+                              continue
+                          actual = hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\x00' + data).hexdigest()
+                          if actual != entry['sha']:
+                              raise ValueError('Pinned blob mismatch: ' + path)
+                          z.writestr(f'repos/{name}/{path}', data)
+                          record['captured_paths'].append(path)
+                  manifest['repositories'][name] = record
+                  print(name, sha, len(record['captured_paths']), 'text files')
+              z.writestr('audit-manifest.json', json.dumps(manifest, indent=2))
+          (out / 'summary.json').write_text(json.dumps({n: {k: r[k] for k in ['status', 'base_sha', 'tree_sha'] if k in r} for n, r in manifest['repositories'].items()}, indent=2) + '\n')
+          print('Audit collection complete; no source code executed and no remote source changed.')
+          PY
+      - name: Retain bounded audit evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jevelopers-licensing-source-text
+          path: licensing-audit-output/
+          retention-days: 1
+          if-no-files-found: error
