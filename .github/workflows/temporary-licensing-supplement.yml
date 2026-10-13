@@ -1,0 +1,108 @@
+name: Temporary licensing supplement
+on:
+  push:
+    branches: ["docs/jevelopers-license-payload-20261013"]
+    paths: [".github/workflows/temporary-licensing-supplement.yml"]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Provision font metadata reader
+        run: python3 -m pip install --only-binary=:all: --disable-pip-version-check --no-input fonttools==4.66.1 brotli==1.1.0
+      - name: Read pinned sources, archive notices and font metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import base64, hashlib, io, json, os, re, tarfile, zipfile
+          from pathlib import Path, PurePosixPath
+          from urllib.error import HTTPError
+          from urllib.request import Request, urlopen
+          from fontTools.ttLib import TTFont
+          ORG = 'Jevelopers-neatHack-2026'
+          PINS = {
+            'cost-intelligence':'2d8ab3aa787a34e1005a6e2398ddbbcdd905c2e4',
+            'creative-engine':'e3df42720b1a864e397244d7f0824353c8e32762',
+            'event-intelligence':'ceb8e6dbf666373cd41fdb3533f9e7587a075a68',
+            'fulfillment-connectors':'5f7e952f1632d0c07005bc64603ad1c28558814e',
+            'getticketstub.com':'3ded8581283ba0890b77659c996c1cee107c6cf9',
+            'print-production':'a6799943ae8e15326807e05a7ca50c783a39f5e7',
+            'shared-contracts':'cd961246234f8666303f306ac349c69b8b3236cd',
+            'team-dashboard':'5aa5dda931b1188115d4a46d9e5da7fee2204b06'
+          }
+          def get(url, limit=160000000):
+              headers={'User-Agent':'Jevelopers-license-audit'}
+              if url.startswith('https://api.github.com/'):
+                  headers['Authorization']='Bearer '+os.environ['GH_TOKEN']
+              with urlopen(Request(url, headers=headers), timeout=90) as response:
+                  data=response.read(limit+1)
+              if len(data)>limit: raise ValueError('size bound')
+              return data
+          def api(path):return json.loads(get('https://api.github.com/'+path,10000000))
+          def license_name(path):return bool(re.search(r'(^|/)([^/]*(?:LICENSE|LICENCE|COPYING|NOTICE|OFL)[^/]*|copyright)$',path,re.I))
+          out=Path('supplement');out.mkdir(exist_ok=True)
+          report={'pins':PINS,'fonts':[],'archives':[],'upstream':[],'omissions':[]}
+          with zipfile.ZipFile(out/'supplement-text.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for repo,sha in PINS.items():
+                  data=get(f'https://codeload.github.com/{ORG}/{repo}/tar.gz/{sha}')
+                  with tarfile.open(fileobj=io.BytesIO(data),mode='r:gz') as tar:
+                      for member in tar:
+                          if not member.isfile():continue
+                          parts=PurePosixPath(member.name).parts
+                          if len(parts)<2 or '..' in parts:continue
+                          path=str(PurePosixPath(*parts[1:]));ext=PurePosixPath(path).suffix.lower()
+                          if ext in {'.ttf','.otf','.woff','.woff2'} and member.size<10000000:
+                              raw=tar.extractfile(member).read()
+                              try:
+                                  font=TTFont(io.BytesIO(raw))
+                                  names={str(i):sorted({n.toUnicode() for n in font['name'].names if n.nameID==i}) for i in [0,1,2,3,4,5,6,8,9,11,13,14]}
+                                  report['fonts'].append({'repo':repo,'path':path,'sha256':hashlib.sha256(raw).hexdigest(),'names':names})
+                              except Exception as e:report['omissions'].append({'repo':repo,'path':path,'reason':type(e).__name__})
+                              continue
+                          if ext=='.tgz' and member.size<40000000:
+                              raw=tar.extractfile(member).read();record={'repo':repo,'path':path,'sha256':hashlib.sha256(raw).hexdigest(),'members':[],'notices':[]}
+                              with tarfile.open(fileobj=io.BytesIO(raw),mode='r:gz') as nested:
+                                  for child in nested:
+                                      if not child.isfile():continue
+                                      cp=PurePosixPath(child.name)
+                                      if cp.is_absolute() or '..' in cp.parts:raise ValueError('unsafe nested path')
+                                      record['members'].append(child.name)
+                                      if (license_name(child.name) or cp.name in {'package.json','MANIFEST.json','dependency-provenance.json'}) and child.size<200000:
+                                          content=nested.extractfile(child).read();content.decode('utf-8')
+                                          dest=f'archive-notices/{repo}/{path}/{child.name}'
+                                          z.writestr(dest,content);record['notices'].append(dest)
+                              report['archives'].append(record)
+                              continue
+                          if (ext in {'.mts','.cts','.c','.h','.jsonld','.xhtml','.seccomp','.playwright','.sha256','.lock','.ndjson'} or license_name(path)) and member.size<20000000:
+                              raw=tar.extractfile(member).read()
+                              try:raw.decode('utf-8')
+                              except UnicodeDecodeError:continue
+                              if b'\x00' in raw:continue
+                              z.writestr(f'repos/{repo}/{path}',raw)
+                  print(repo,'supplement captured')
+              sources=[('microsoft/playwright','606ecd8b34bac100db32561b6278ffd76e5eb3cd',['LICENSE','NOTICE']),('entireio/entire-graph','22e6f50f56b9e6d9fd740c5c54c3a42b94d3a282',['LICENSE','internal/cli/agents.go'])]
+              google=api('repos/google/fonts/git/ref/heads/main')['object']['sha']
+              sources.append(('google/fonts',google,[f'ofl/{name}/OFL.txt' for name in ['abrilfatface','archivo','bigshouldersdisplay','bigshoulders','fraunces','ibmplexmono','intertight']]))
+              cue=api('repos/danielwh2/cuelume/git/ref/heads/main')['object']['sha']
+              sources.append(('danielwh2/cuelume',cue,['LICENSE','LICENSE.md','LICENSE.txt','package.json']))
+              for full,sha,paths in sources:
+                  for path in paths:
+                      url=f'https://raw.githubusercontent.com/{full}/{sha}/{path}'
+                      try:raw=get(url,5000000);raw.decode('utf-8')
+                      except HTTPError as e:
+                          report['omissions'].append({'source':url,'status':e.code});continue
+                      dest=f'upstream/{full}/{path}';z.writestr(dest,raw)
+                      report['upstream'].append({'repository':full,'sha':sha,'path':path,'url':url,'sha256':hashlib.sha256(raw).hexdigest(),'local_path':dest})
+              z.writestr('supplement-report.json',json.dumps(report,indent=2))
+          print('Only text and font metadata retained; no font files retained in artifact.')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jevelopers-licensing-supplement-text
+          path: supplement/
+          retention-days: 1
+          if-no-files-found: error
