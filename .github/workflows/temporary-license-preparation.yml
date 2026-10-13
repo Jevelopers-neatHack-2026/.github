@@ -1,0 +1,45 @@
+name: Temporary licensing candidate preparation
+on:
+  push:
+    branches: ["docs/jevelopers-license-preparation-20261013"]
+    paths: [".github/workflows/temporary-license-preparation.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: licensing-candidate-preparation
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: c9b08a1c2a7e3e1e0f49051fce0be0603d3e138c
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Prepare, validate and publish only the expected licensing tree
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, os, subprocess
+          from pathlib import Path
+          from urllib.request import urlopen
+          url = 'https://raw.githubusercontent.com/Jevelopers-neatHack-2026/.github/f921ff50d80dfd173a0256d1c8e45ba891691242/temporary-licensing/publish_candidate.py'
+          with urlopen(url, timeout=30) as response:
+              if response.url != url: raise RuntimeError('Unexpected redirect')
+              data = response.read(100001)
+          if hashlib.sha256(data).hexdigest() != '52b97cdaf094cf2f82d5d092cee7161644813ec16e3d8dfe37313f97221f1d38':
+              raise RuntimeError('Publisher checksum mismatch')
+          path = Path(os.environ['RUNNER_TEMP']) / 'publish_licensing_candidate.py'
+          path.write_bytes(data)
+          subprocess.run(['python3', str(path)], check=True)
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: licensing-candidate-result
+          path: ${{ runner.temp }}/licensing-result/
+          retention-days: 7
+          if-no-files-found: error
