@@ -252,7 +252,7 @@
       "P3": 1,
       "none": 458
     },
-    "priority_note": "Priority is the severity of a documentation remediation, not an implementation defect severity or a claim that an issue remains unresolved. Read remediation and outcome together."
+    "priority_note": "Frozen v1.1 priority distribution from the 2026-10-12 audit (550 rows); not recalculated after the scoped 2026-10-15 PR #29 correction changes the three .github document-row priorities from P2 to none. These values remain a historical distribution, not a roll-up of the corrected row fields. Priority is the severity of a documentation remediation, not an implementation defect severity or a claim that an issue remains unresolved. Read remediation and outcome together."
   },
   "repository_reports": {
     ".github": {
@@ -377,7 +377,76 @@
         "Landing-page PR #37 remains open after source review; the repository is archived and its PR-body mutation endpoint returned 403.",
         "Marketing PR #32 remains open; PI-MM-001 is on package-owner HOLD. The independently reviewed candidate does not close the owner recovery requirement.",
         "The component snapshot contains 21 task PRs: 18 merged, 3 open. Root performed 10 merges and 8 task PRs merged externally (Cost #50/#55 refer to the same actual merge). Those disposition counts do not convert documentation or review evidence into owner acceptance.",
-        "The local governance gate and selected cross-repository master acceptance criteria remain owner-pending; documentation and local fixture results do not satisfy them."
+        "The GH-11 local gate (#16) and epic #3 were accepted and closed for the reduced repository-guidance scope on 2026-10-12. GH-07 security reporting (#11) and GH-03-I sixth-form/private-routing work (#13) were explicitly deferred as not planned; the original security baseline remains incomplete and no private reporting route is confirmed. Selected cross-repository master acceptance criteria remain owner-pending with integration-evals; documentation and local fixture results do not satisfy them."
+      ],
+      "review_corrections": [
+        {
+          "id": "PR29-R1",
+          "reviewed_at": "2026-10-15",
+          "scope": "Correct the three .github document-row assessments against the unchanged source blobs; preserve the earlier inventory assessments below. No source document was edited.",
+          "source_blob_verification": {
+            "base_commit": "c9b08a1c2a7e3e1e0f49051fce0be0603d3e138c",
+            "method": "For each path, the base, current HEAD, and worktree Git blob IDs match; the base-to-HEAD path diff is empty.",
+            "files": [
+              {
+                "file": "docs/architecture/ACCEPTANCE.md",
+                "git_blob_sha": "437b0292f36654ad3cb1191306f6d02aed99ab16",
+                "sha256": "9279f923261a31a55c39bf8f59bae485b240d92dcd75e3a053eb9a2260bbdc8e"
+              },
+              {
+                "file": "standards/acceptance-evidence.md",
+                "git_blob_sha": "81bf335b72255a6ff4928659e85b5b0865fa77c5",
+                "sha256": "20165da45a60603c342be8ea9a86aeda51ad46ce71ab8eb56003bd04b3f00378"
+              },
+              {
+                "file": "standards/architecture-linking.md",
+                "git_blob_sha": "a17df3bfa3214bad985bc270812f533e9741517c",
+                "sha256": "596aa8cf741415ccea0e80d5ce11d5582e67b65cc588dcc38c058c8388667bf9"
+              }
+            ]
+          },
+          "prior_inventory_assessments": [
+            {
+              "file": "docs/architecture/ACCEPTANCE.md",
+              "accuracy": "Pins the reviewed integration-evals main at 13bde39399a09d4a14cc97d72cd769b51da83e00: 47 criteria, 44 planned, and SPN-01/02/03 verified. The local FIN-01 correction is planned and does not change the master tracker.",
+              "completeness": "Retains criterion IDs, priority and owner roles with a dated source pin.",
+              "missing_information": "Master status must be refreshed from integration-evals before a later decision; named assignees remain unknown.",
+              "remediation": "Local view selects master items but does not duplicate status authority.",
+              "priority": "P2",
+              "outcome": "updated"
+            },
+            {
+              "file": "standards/acceptance-evidence.md",
+              "accuracy": "Retains historical tracker observations and adds the independently reviewed post-merge snapshot at 13bde39399a09d4a14cc97d72cd769b51da83e00: 47 criteria, 44 planned, and SPN-01/02/03 verified. The local FIN-01 view is planned and does not change the master.",
+              "completeness": "Preserves distinct source observations and refresh instructions.",
+              "missing_information": "Future status decisions require the then-current integration-evals main revision and its owner evidence.",
+              "remediation": "Snapshots are explicitly separate and not substituted for current status.",
+              "priority": "P2",
+              "outcome": "updated"
+            },
+            {
+              "file": "standards/architecture-linking.md",
+              "accuracy": "Registry points to the published app current-state companion at aec83af65ee75be80246d88782c8f8ce00a10c31 and preserves behavior pin 138e4b9019c0f5a55ad5e3f586d129216b680e4d. Shared-contracts is verified at 70f8db306295988d5e37ef5e3eb22f37e271cfc0 (tree 2d6094f50857f3a753429e1221b81bc9e89a7ca9); #48/#49/#51 are represented in main history. Integration-evals source is pinned at 13bde39399a09d4a14cc97d72cd769b51da83e00.",
+              "completeness": "Separates current navigation, design intent, observed revisions, evidence snapshots and handoff process.",
+              "missing_information": "Branch links can move; refresh the relevant source revision before a new decision. Shared consumer adoption is not universal (3/9 receipts and 0/76 acknowledgments in the observed source state).",
+              "remediation": "Dated GH-09/SC-12 walkthrough is explicitly historical and remains immutable.",
+              "priority": "P2",
+              "outcome": "updated"
+            }
+          ],
+          "resolution": "The live rows now describe each exact unchanged source blob and use the existing reviewed_no_change outcome with priority none. The original row assessments remain preserved here; the historical aggregate priority counts are explicitly frozen rather than recomputed."
+        },
+        {
+          "id": "PR29-R2",
+          "reviewed_at": "2026-10-15",
+          "scope": "Correct only the local-governance-gate sentence in implementation_gaps; retain the deferred security gaps and master-acceptance boundary.",
+          "prior_statement": "The local governance gate and selected cross-repository master acceptance criteria remain owner-pending; documentation and local fixture results do not satisfy them.",
+          "corrected_statement": "The GH-11 local gate (#16) and epic #3 were accepted and closed for the reduced repository-guidance scope on 2026-10-12. GH-07 security reporting (#11) and GH-03-I sixth-form/private-routing work (#13) were explicitly deferred as not planned; the original security baseline remains incomplete and no private reporting route is confirmed. Selected cross-repository master acceptance criteria remain owner-pending with integration-evals; documentation and local fixture results do not satisfy them.",
+          "basis": [
+            "README.md Status records the 2026-10-12 accepted reduced scope, #11/#13 not-planned exclusions, and #16/#3 closure.",
+            "docs/status.md Current status records #16/#3 closed completed for reduced scope, #11/#13 closed not planned, the incomplete security baseline, and the master-acceptance boundary."
+          ]
+        }
       ],
       "explicit_exclusions": [
         {
@@ -920,15 +989,15 @@
             "sha": "f11269657f646dd6cf9f8ccc61dcc315bcc9ac2a",
             "date": "2026-10-10T02:55:10-04:00"
           },
-          "accuracy": "Pins the reviewed integration-evals main at 13bde39399a09d4a14cc97d72cd769b51da83e00: 47 criteria, 44 planned, and SPN-01/02/03 verified. The local FIN-01 correction is planned and does not change the master tracker.",
-          "completeness": "Retains criterion IDs, priority and owner roles with a dated source pin.",
-          "missing_information": "Master status must be refreshed from integration-evals before a later decision; named assignees remain unknown.",
+          "accuracy": "The unchanged view links the moving integration-evals master, states all criteria start planned and architecture distribution verifies none, and lists ARC-02, CON-01, EVAL-04, and LIVE-02 with owner roles. It contains no 13bde39399a09d4a14cc97d72cd769b51da83e00 pin, 47/44/SPN snapshot, or local FIN-01 correction.",
+          "completeness": "Complete as a selected-criteria navigation view: it leaves status and evidence with the master and preserves the selected IDs and owner roles, but provides no immutable master snapshot.",
+          "missing_information": "Read a dated current integration-evals revision and owner evidence before a status decision; named assignees remain unconfirmed.",
           "broken_references": [],
           "duplication_conflicts": "No competing authority or duplication conflict was found; linked owners remain authoritative.",
-          "remediation": "Local view selects master items but does not duplicate status authority.",
-          "priority": "P2",
+          "remediation": "Corrected this inventory description to the unchanged selection-only source; preserve its moving master link and do not claim a pin, status refresh, or source update.",
+          "priority": "none",
           "ownership_approval": "No owner sign-off or acceptance is asserted; existing authority remains with the named policy, product, security, destination, or integration-evals owner.",
-          "outcome": "updated"
+          "outcome": "reviewed_no_change"
         },
         {
           "file": "docs/architecture/OWNERSHIP.md",
@@ -1077,15 +1146,15 @@
             "sha": "cd755fc456e4f7e469492adf641d35b72edb3ea6",
             "date": "2026-10-12T00:10:12-04:00"
           },
-          "accuracy": "Retains historical tracker observations and adds the independently reviewed post-merge snapshot at 13bde39399a09d4a14cc97d72cd769b51da83e00: 47 criteria, 44 planned, and SPN-01/02/03 verified. The local FIN-01 view is planned and does not change the master.",
-          "completeness": "Preserves distinct source observations and refresh instructions.",
-          "missing_information": "Future status decisions require the then-current integration-evals main revision and its owner evidence.",
+          "accuracy": "The unchanged standard records the initial baseline at ff1f6d2df816ebbff34742f51be728fcb5c28cb5, the IE-09A comparison at f4ac1b3ce9da335e2ec9f2a1ff21861439d33e46, and a separate 2026-10-12 read-only main observation at a8174f642449a6bf7f42f9f8790a6485842afd5a with 47 criteria, 44 planned, and SPN-01/02/03 verified. It contains no 13bde39399a09d4a14cc97d72cd769b51da83e00 snapshot or local FIN-01 view.",
+          "completeness": "Preserves the distinct baseline, consumer comparison, dated read-only observation, master-authority boundary, and instruction to refresh before later status decisions.",
+          "missing_information": "A later status decision requires the then-current integration-evals main revision and owner evidence; the recorded a8174f observation can go stale.",
           "broken_references": [],
           "duplication_conflicts": "No competing authority or duplication conflict was found; linked owners remain authoritative.",
-          "remediation": "Snapshots are explicitly separate and not substituted for current status.",
-          "priority": "P2",
+          "remediation": "Corrected this inventory description to match the unchanged dated observations; retain the historical snapshots and refresh caveat without claiming a source update.",
+          "priority": "none",
           "ownership_approval": "No owner sign-off or acceptance is asserted; existing authority remains with the named policy, product, security, destination, or integration-evals owner.",
-          "outcome": "updated"
+          "outcome": "reviewed_no_change"
         },
         {
           "file": "standards/agent-contributors.md",
@@ -1126,15 +1195,15 @@
             "sha": "017d349ca37f901d5502c9fcb8ec0eb33d25c2c4",
             "date": "2026-10-10T22:55:55-04:00"
           },
-          "accuracy": "Registry points to the published app current-state companion at aec83af65ee75be80246d88782c8f8ce00a10c31 and preserves behavior pin 138e4b9019c0f5a55ad5e3f586d129216b680e4d. Shared-contracts is verified at 70f8db306295988d5e37ef5e3eb22f37e271cfc0 (tree 2d6094f50857f3a753429e1221b81bc9e89a7ca9); #48/#49/#51 are represented in main history. Integration-evals source is pinned at 13bde39399a09d4a14cc97d72cd769b51da83e00.",
-          "completeness": "Separates current navigation, design intent, observed revisions, evidence snapshots and handoff process.",
-          "missing_information": "Branch links can move; refresh the relevant source revision before a new decision. Shared consumer adoption is not universal (3/9 receipts and 0/76 acknowledgments in the observed source state).",
+          "accuracy": "The unchanged standard preserves inspected historical pins for the architecture kit (7f59d33922a0585205547d490b288b49eed32419), implementation plan (5a2986454297dd6df97088a8fbde69adc771f7a0), shared-contracts catalog (c4caaccc2ea63b273eeac17ed89af8ac64f6bbde), and integration-evals checklist (ff1f6d2df816ebbff34742f51be728fcb5c28cb5). It says to recheck current sources and records the GH-09/SC-12 walkthrough as a dated blocked handoff, followed by an Oct 12 local note that GH-11 #16 and epic #3 were completed. It contains none of the aec83af, 70f8db3, or 13bde393 pins or the 3/9 and 0/76 adoption observations claimed in the prior row.",
+          "completeness": "Provides source precedence, immutable-link and handoff rules, and dates its walkthrough and later local-status note; it does not present the inventory's later cross-repository pins or adoption counts as content in this standard.",
+          "missing_information": "Current source revisions and consumer-adoption evidence must be checked with their owners before a later decision; the walkthrough's pinned examples are historical.",
           "broken_references": [],
           "duplication_conflicts": "No competing authority or duplication conflict was found; linked owners remain authoritative.",
-          "remediation": "Dated GH-09/SC-12 walkthrough is explicitly historical and remains immutable.",
-          "priority": "P2",
+          "remediation": "Corrected this inventory row only; retain the historical GH-09/SC-12 walkthrough and later local-status note without attributing newer cross-repository pins to this unchanged file.",
+          "priority": "none",
           "ownership_approval": "No owner sign-off or acceptance is asserted; existing authority remains with the named policy, product, security, destination, or integration-evals owner.",
-          "outcome": "updated"
+          "outcome": "reviewed_no_change"
         },
         {
           "file": "standards/contribution-workflow.md",
