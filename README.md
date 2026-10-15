@@ -102,4 +102,4 @@ Each repository owns its local instructions, checks, settings and adoption recor
 
 ## Contributing
 
-Follow [CONTRIBUTING.md](CONTRIBUTING.md) and, for agents, [AGENTS.md](AGENTS.md). Use neutral `Refs #N` links, record the commands you actually ran, and keep credentials and customer data out of every artifact. Agent instructions, CODEOWNERS, licenses, workflow callers, labels and settings are local decisions in each repository; no license file is included here.
+Follow [CONTRIBUTING.md](CONTRIBUTING.md) and, for agents, [AGENTS.md](AGENTS.md). Use neutral `Refs #N` links, record the commands you actually ran, and keep credentials and customer data out of every artifact. Agent instructions, CODEOWNERS, licenses, workflow callers, labels and settings are local decisions in each repository; this repository now provides the [MIT License](LICENSE) and [COPYRIGHT.md](COPYRIGHT.md) for its original software/documentation scope and preserved rights.
